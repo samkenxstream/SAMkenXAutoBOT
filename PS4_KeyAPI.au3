@@ -1,6 +1,5 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
-#include "IncludeCommon.au3"
 
 
 Global $g_KEY_ID_NONE        = 0
@@ -22,6 +21,11 @@ Global const $g_KEY_ID_MAX   = 20
 Global const $g_DEFAULT_KEYDOWN_DELAY = 80
 
 Global $g_KEY_MAP[$g_KEY_ID_MAX]
+
+
+#include "IncludeCommon.au3"
+
+
 
 if @ScriptName == "PS4_KeyAPI.au3" then
     _KeyMap_Startup()
