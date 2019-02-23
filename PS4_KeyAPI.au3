@@ -1,7 +1,7 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
-#include "log4a.au3"
-#include "PS4_RPLAY_CONST.au3"
+#include "IncludeCommon.au3"
+
 
 Global $g_KEY_ID_NONE        = 0
 Global $g_KEY_ID_CROSS       = 1

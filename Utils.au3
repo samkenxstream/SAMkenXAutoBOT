@@ -1,9 +1,6 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
-#include "SmtpMailer.au3"
-#include "log4a.au3"
-#include <Date.au3>
-
+#include "IncludeCommon.au3"
 
 Func send_email($sAttachFiles = "")
     Local $sSmtpServer = "smtp.ym.163.com" ; address for the smtp-server to use - REQUIRED

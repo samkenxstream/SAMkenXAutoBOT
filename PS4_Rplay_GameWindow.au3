@@ -1,22 +1,16 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
-#include "PS4_RPLAY_CONST.au3"
-#include "log4a.au3"
-#include "Utils.au3"
-#include <Date.au3>
-
-
 Global $g_hwnd_rplay = 0
 Global $g_rplay_started = False
-Global const $g_WindowPosX = 175
-Global const $g_WindowPosY = 35
-Global const $g_WindowWidth = 883
-Global const $g_WindowHight = 583
+Global const $g_WindowPosX = 149
+Global const $g_WindowPosY = 28
+Global const $g_WindowWidth = 870
+Global const $g_WindowHight = 519
 
-if @ScriptName == "PS4_Rplay_GameWindow.au3" then
-    _log4a_SetEnable()
-    _PS4_GameWindow_StartUp()
-endif
+
+#include "IncludeCommon.au3"
+
+
 
 
 Func _PS4_GameWindow_StartUp()
@@ -107,3 +101,6 @@ Func PS4MacroWindowStart()
     Run($g_PS4Macro_EXE_PATH)
     Sleep(1000)
 EndFunc
+
+
+
