@@ -82,7 +82,7 @@ Func GameWindowCheck()
 		_log4a_Info("Process exited,stop!!!!")
 		exit 0
 	endif
-    checkInvalidWindow()
+    CheckInvalidWindow()
     Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
     ;_log4a_Info("X-Pos: "&$aPos[0]&"Y-Pos: "&$aPos[1]&"Width: "&$aPos[2]&"Height: "&$aPos[3])
     Local $time_diff = _NowCalc() - $now
@@ -103,4 +103,11 @@ Func PS4MacroWindowStart()
 EndFunc
 
 
-
+Func SetFuocusWindow()
+    WinActivate($g_RPLAY_WIN_TITLE)
+    CheckInvalidWindow()
+    Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
+    if $aPos[2] <> $g_WindowWidth and $aPos[3] <> $g_WindowHight then
+        WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
+    endif
+EndFunc

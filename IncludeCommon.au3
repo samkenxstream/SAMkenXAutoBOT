@@ -17,7 +17,7 @@
 #include "PES2019_GameResource.au3"
 #include "HotKeyMgr.au3"
 #include "SmtpMailer.au3"
-
+#include "PES2019_SCENES.au3"
 
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)

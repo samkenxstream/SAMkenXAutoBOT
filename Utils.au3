@@ -29,7 +29,7 @@ Func send_email($sAttachFiles = "")
 
 EndFunc   ;==>_Example
 
-Func checkInvalidWindow()
+Func CheckInvalidWindow()
     Local $tv_title = "发起会话"
     Local $tv_btn = "确定"
     Local $tv_Wnd = WinExists($tv_title,$tv_btn)
