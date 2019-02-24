@@ -18,3 +18,8 @@
 #include "HotKeyMgr.au3"
 #include "SmtpMailer.au3"
 
+
+_log4a_SetEnable()
+_log4a_SetOutput($LOG4A_OUTPUT_BOTH)
+
+

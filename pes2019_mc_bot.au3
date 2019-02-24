@@ -13,9 +13,9 @@ Global $g_game_end_snapshot = @MyDocumentsDir&"\pes2019_game_finished.jpg"
 
 DirCreate(@MyDocumentsDir & "\test_folder\")
 
-_log4a_SetEnable()
+
 _log4a_SetLogFile($g_log_path)
-_log4a_SetOutput($LOG4A_OUTPUT_BOTH)
+
 _KeyMap_Startup()
 _OpenCV_Startup();loads opencv DLLs
 _PS4_GameWindow_StartUp()
