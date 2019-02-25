@@ -14,7 +14,7 @@ GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
 #include "IncludeCommon.au3"
-
+GUISetOnEvent($GUI_EVENT_CLOSE, "WindowClose")
 GUICtrlSetOnEvent($Button1, "onLoadImage")
 GUICtrlSetOnEvent($Button2, "onLoadSubImage")
 
@@ -31,7 +31,7 @@ WEnd
 
 Func onLoadImage()
 	_log4a_Info("onLoadImage")
-	Local $sFileOpenDialog = FileOpenDialog("Select Image", @WindowsDir & "\", "Images (*.jpg;*.bmp",BitOR($FD_FILEMUSTEXIST, $FD_MULTISELECT))
+	Local $sFileOpenDialog = FileOpenDialog("Select Image", @MyDocumentsDir & "\", "Images (*.jpg;*.bmp)",BitOR($FD_FILEMUSTEXIST, $FD_MULTISELECT))
 	If @error Then
         ; Display the error message.
         MsgBox($MB_SYSTEMMODAL, "", "No file(s) were selected.")
@@ -39,14 +39,7 @@ Func onLoadImage()
         ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
         FileChangeDir(@ScriptDir)
     Else
-        ; Change the working directory (@WorkingDir) back to the location of the script directory as FileOpenDialog sets it to the last accessed folder.
-        FileChangeDir(@ScriptDir)
 
-        ; Replace instances of "|" with @CRLF in the string returned by FileOpenDialog.
-        $sFileOpenDialog = StringReplace($sFileOpenDialog, "|", @CRLF)
-
-        ; Display the list of selected files.
-        MsgBox($MB_SYSTEMMODAL, "", "You chose the following files:" & @CRLF & $sFileOpenDialog)
     EndIf
 EndFunc
 
@@ -54,4 +47,9 @@ Func onLoadSubImage()
 	_log4a_Info("onLoadSubImage")
 EndFunc
 
+
+Func WindowClose()
+	MsgBox($MB_OK, "GUI Event", "You selected CLOSE! Exiting...")
+    Exit
+EndFunc
 

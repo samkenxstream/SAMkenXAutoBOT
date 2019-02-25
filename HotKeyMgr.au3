@@ -8,6 +8,7 @@ Local const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 if @ScriptName == "HotKeyMgr.au3" then
     _log4a_SetEnable()
     _PS4_HotKey_Init()
+
 	While True
 		Sleep(500)
     WEnd

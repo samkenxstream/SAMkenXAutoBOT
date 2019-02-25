@@ -9,11 +9,11 @@ global $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = 0x37225B
 if @ScriptName == "PES2019_SCENES.au3" then
     $hwnd = GetPS4RemoteWindowHandler()
     $hbitmap = GetScreenSnapshot($hwnd)
-    PixelSearch()
+    ;PixelSearch()
 endif
 
 Func CheckInMainMenu()
-    
+
 EndFunc
 
 
