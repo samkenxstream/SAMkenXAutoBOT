@@ -1,8 +1,10 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
-#include "IncludeCommon.au3"
+
 
 Local const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
+
+#include "IncludeCommon.au3"
 
 
 if @ScriptName == "HotKeyMgr.au3" then
