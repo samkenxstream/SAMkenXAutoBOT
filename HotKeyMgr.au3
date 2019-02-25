@@ -8,8 +8,7 @@ Local const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 if @ScriptName == "HotKeyMgr.au3" then
     _log4a_SetEnable()
     _PS4_HotKey_Init()
-
-	While True
+    While True
 		Sleep(500)
     WEnd
 endif
@@ -23,12 +22,16 @@ Func _PS4_HotKey_Init()
 EndFunc
 
 
-Func PrintWindowSize()
+Func PrintWindowSize(); alt+k
 	Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
 	_log4a_Info("screen_width="&@DeskTopWidth&",screen_hight="&@DeskTopHeight)
 	_log4a_Info("win pos:x="&$aPos[0]&",y="&$aPos[1]&",w="&$aPos[2]&",h="&$aPos[3])
 	Local $aClientSize = WinGetClientSize($g_RPLAY_WIN_TITLE)
     _log4a_Info("client size:w="&$aClientSize[0]&",h="&$aClientSize[1])
+    Local $mousePos = MouseGetPos()
+    _log4a_Info("Mouse pos:x="&$mousePos[0]&",y="&$mousePos[1])
+    Local $iColor = PixelGetColor($mousePos[0],$mousePos[1])
+    _log4a_Info("Current color is "&Hex($iColor, 6))
 
 EndFunc
 

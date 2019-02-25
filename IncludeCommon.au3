@@ -21,5 +21,5 @@
 
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)
-
+DllCall("User32.dll","bool","SetProcessDPIAware")
 
