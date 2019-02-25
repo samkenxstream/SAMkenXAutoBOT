@@ -72,5 +72,22 @@ Func CheckGameState($hBitmap,$Threshold,$onMatched)
 
 EndFunc
 
+Func CheckPic($img_id)
+    $pic_name = $g_GAME_PIC_ARRAY[$img_id]
+    $Match_Pic = @ScriptDir&"\pes2019_img_search\"&$pic_name
+    $hwnd = GetPS4RemoteWindowHandler()
+    
+    Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
+    $Match = _MatchPicture($Match_Pic,$hBitmap, $g_PicMatch_Threshold)
+    If Not @error Then
+        ;Find match pic
+        _log4a_Info("CheckPic,match success for "&$pic_name)
+        return true
+    else
+        _log4a_Info("CheckPic,match faied for "&$pic_name)
+        return false
+    EndIf
+EndFunc
+
 
 

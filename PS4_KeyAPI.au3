@@ -28,7 +28,7 @@ Global $g_KEY_MAP[$g_KEY_ID_MAX]
 
 
 if @ScriptName == "PS4_KeyAPI.au3" then
-    _KeyMap_Startup()
+
     test_ps4_key_map()
 endif
 
@@ -70,9 +70,8 @@ EndFunc
 
 Func _KeyPress($key_id)
     $key_name = $g_KEY_MAP[$key_id]
-    WinActivate($g_RPLAY_WIN_TITLE)
-    Sleep(100)
 	_log4a_Info("KeyPress:"&$key_name)
     ;ControlSend($g_RPLAY_WIN_TITLE,"","",$key_name)
 	Send($key_name)
+    Sleep(200)
 EndFunc

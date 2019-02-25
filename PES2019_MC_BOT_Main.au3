@@ -11,20 +11,10 @@ Global $g_game_end_snapshot = @MyDocumentsDir&"\pes2019_game_finished.jpg"
 
 #include "IncludeCommon.au3"
 
-DirCreate(@MyDocumentsDir & "\test_folder\")
-
-
 _log4a_SetLogFile($g_log_path)
-
-_KeyMap_Startup()
-_OpenCV_Startup();loads opencv DLLs
 _PS4_GameWindow_StartUp()
-_PS4_HotKey_Init()
-
 _log4a_Info("Start to play games")
 
-_GameResource_Startup()
-Local $Threshold = 0.7
 
 Func DoKeyPress($arry_index,$hBitmap)
 	_log4a_Info("DoKeyPress:"&$arry_index)
@@ -86,7 +76,7 @@ While(1)
         ContinueLoop
     endif
     Local $hBitmap = _ScreenCapture_CaptureWnd("", $g_hwnd_rplay)
-    CheckGameState($hBitmap,$Threshold,"DoKeyPress")
+    CheckGameState($hBitmap,$g_PicMatch_Threshold,"DoKeyPress")
     _WinAPI_DeleteObject($hBitmap)
     Sleep($game_window_check_time)
 WEnd

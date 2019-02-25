@@ -40,5 +40,5 @@ Global $g_PS4Macro_EXE_PATH = "C:\Users\lashw\Downloads\PS4Macro_0_5_2\PS4Macro.
 Global $g_PS4Macro_EXE = "PS4Macro.exe"
 Global $g_PS4Macro_Title = "PS4 Macro - v0.5.2 (BETA)"
 
-
+Global $g_PicMatch_Threshold = 0.7
 
