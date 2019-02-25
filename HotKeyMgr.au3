@@ -39,7 +39,8 @@ Func ScreenCapture()
 	_log4a_Info("ScreenCapture")
 	WinActivate($g_RPLAY_WIN_TITLE)
     $hwnd = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
-	Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
+	;Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd,Default,Default,Default,Default,False)
+    Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
 	_ScreenCapture_SaveImage($Screen_Shot_path&"image_"&@HOUR&"_"&@MIN&"_"&@SEC&".bmp",$hBitmap)
 EndFunc
 
