@@ -21,9 +21,11 @@ global const $MAINMENU_TAB_CLUBHOUSE 	= 2 ; club house
 global const $MAINMENU_TAB_SIGN 		= 3 ; 签约
 global const $MAINMENU_TAB_OTHER 		= 4 ; 其他菜单
 
-
-
 #include "IncludeCommon.au3"
+
+local const $gp_team_number = 2
+local const $gp_team_list[] = [$g_IMG_GP_TEAM_1,$g_IMG_GP_TEAM_2]
+
 
 if @ScriptName == "PES2019_SCENES.au3" then
     ;GetTabIndex()
@@ -120,7 +122,7 @@ Func CheckInMatchingStage()
         if $count > 5 then
             exitloop
         endif
-        
+
         if $bok then
             _KeyPress($g_KEY_ID_CROSS)
             exitloop
