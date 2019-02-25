@@ -53,12 +53,13 @@ Func _PS4_GameWindow_StartUp()
         WEnd
         AdlibUnRegister("onViewPanelCheck")
     Endif
+    
+    Sleep(10*1000)
     $g_rplay_started = True
-
-    WinActivate($g_RPLAY_WIN_TITLE)
+    SetFuocusWindow()
     $g_hwnd_rplay = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
-    _log4a_Info("PS4 Game Window Start compelete,hwnd="&$g_hwnd_rplay)
     WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
+    _log4a_Info("PS4 Game Window Start compelete,hwnd="&$g_hwnd_rplay)
 EndFunc
 
 Func onViewPanelCheck()
@@ -111,3 +112,24 @@ Func SetFuocusWindow()
         WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
     endif
 EndFunc
+
+Func GetScreenSnapshot($hwnd = 0)
+    Local $hBitmap
+    if hwnd == 0 then
+        $hBitmap = _ScreenCapture_CaptureWnd("", $g_hwnd_rplay)
+    else
+        $hBitmap = _ScreenCapture_CaptureWnd("", $g_hwnd_rplay)
+    endif
+    return $hBitmap
+EndFunc
+
+
+Func GetPS4RemoteWindowHandler()
+    Local $hwnd
+    SetFuocusWindow()
+    $hwnd = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
+    
+    return $hwnd
+EndFunc
+
+

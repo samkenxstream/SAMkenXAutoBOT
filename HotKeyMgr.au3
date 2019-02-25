@@ -25,7 +25,10 @@ EndFunc
 Func PrintWindowSize()
 	Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
 	_log4a_Info("screen_width="&@DeskTopWidth&",screen_hight="&@DeskTopHeight)
-	_log4a_Info("x="&$aPos[0]&",y="&$aPos[1]&",w="&$aPos[2]&",h="&$aPos[3])
+	_log4a_Info("win pos:x="&$aPos[0]&",y="&$aPos[1]&",w="&$aPos[2]&",h="&$aPos[3])
+	Local $aClientSize = WinGetClientSize($g_RPLAY_WIN_TITLE)
+    _log4a_Info("client size:w="&$aClientSize[0]&",h="&$aClientSize[1])
+
 EndFunc
 
 Func ScreenCapture()
