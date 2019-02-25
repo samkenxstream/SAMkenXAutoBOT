@@ -2,10 +2,10 @@
 #include-once
 Global $g_hwnd_rplay = 0
 Global $g_rplay_started = False
-Global const $g_WindowPosX = 149
-Global const $g_WindowPosY = 28
-Global const $g_WindowWidth = 870
-Global const $g_WindowHight = 519
+Global const $g_WindowPosX = 291
+Global const $g_WindowPosY = 141
+Global const $g_WindowWidth = 1306
+Global const $g_WindowHight = 779
 
 
 #include "IncludeCommon.au3"
