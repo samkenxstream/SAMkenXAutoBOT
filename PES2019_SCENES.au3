@@ -15,7 +15,7 @@ global const $MAINMENU_MIDCARD_X3 = 837
 global const $MAINMENU_MIDCARD_Y = 440
 global const $MAINMENU_MIDCARD_W = 320
 global const $MAINMENU_MIDCARD_H = 160
-global const $MAINMENU_MIDCARD_HIGHT_COLOR = [0x0C77EB,0x1980f3]
+global const $MAINMENU_MIDCARD_UNSELECT_COLOR = 0xdcd8d1
 
 global const $MAINMENU_MIDCARD_NONE     = 0
 global const $MAINMENU_MIDCARD_LEFT     = 1
@@ -23,31 +23,9 @@ global const $MAINMENU_MIDCARD_MID      = 2
 global const $MAINMENU_MIDCARD_RIGHT    = 3
 
 
-;球探星级区域
-global const $SCOUTS_LEVEL_W = 30
-global const $SCOUTS_LEVEL_H = 30
-global const $SCOUTS_LEVEL_Y = 238
-global const $SCOUTS_LEVEL_X1 = 979
-global const $SCOUTS_LEVEL_X2 = 1017
-global const $SCOUTS_LEVEL_X3 = 1053
-global const $SCOUTS_LEVEL_X4 = 1088
-global const $SCOUTS_HIGHT_COLOR = 0xFFB423
-
-;请求谈判高亮区域
-global const $SCOUTS_CONFIRM_X = 74
-global const $SCOUTS_CONFIRM_Y = 487
-global const $SCOUTS_CONFIRM_W = 556
-global const $SCOUTS_CONFIRM_H = 57
-global const $SCOUTS_CONFIRM_HIGHT_COLOR = 0x2790ff
 
 
-;确认菜单高亮区域
-global const $CONFIRM_HIGHT_COLOR = 0x258eff
-global const $CONFIRM_BTN_W = 336
-global const $CONFIRM_BTN_H = 53
-global const $CONFIRM_BTN_Y = 460
-global const $CONFIRM_BTN_CANCEL_X = 292
-global const $CONFIRM_BTN_OK_X = 666
+
 
 ;主菜单的三个选项卡，比赛/CLUBHOUSE/签约
 global const $MAINMENU_TOPTAB_MATCH 		= 1 ; 比赛菜单
@@ -83,7 +61,7 @@ Func CreateRectEx($x,$y,$w,$h)
 	$rect[1] = $y1
 	$rect[2] = $x2
 	$rect[3] = $y2
-	_log4a_Info("CreateRectEx:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
+	;_log4a_Info("CreateRectEx:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
     return $rect
 EndFunc
 
@@ -110,14 +88,12 @@ Func GetMidTabIndex()
 
     For $i = 0 To UBound($x_array) - 1
         local $rect = CreateRectEx($x_array[$i],$MAINMENU_MIDCARD_Y,$MAINMENU_MIDCARD_W,$MAINMENU_MIDCARD_H)
-        For $j = 0 to UBound($MAINMENU_MIDCARD_HIGHT_COLOR) - 1
-            Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_MIDCARD_HIGHT_COLOR,$IMAGE_SEARCH_SV)
-            If not @error then
-                $index = ($i + 1)
-                _log4a_Info("GetMidTabIndex,find index:"&$index)
-                return $index
-            endif
-        next
+        Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_MIDCARD_UNSELECT_COLOR,$IMAGE_SEARCH_SV)
+        If @error then
+            $index = ($i + 1)
+            _log4a_Info("GetMidTabIndex,find index:"&$index)
+            return $index
+        endif
     next
 
     _log4a_Info("GetMidTabIndex,find table card failed.")
