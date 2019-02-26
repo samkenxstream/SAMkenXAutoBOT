@@ -163,7 +163,9 @@ Func CheckInMatchingStage()
     local $count = 0
     $bok = CheckPic($g_IMG_PAUSE_MENU)
     while not $bok
-        $bok = _KeyPress($g_KEY_ID_OPTION)
+        _KeyPress($g_KEY_ID_OPTION)
+		Sleep(1000)
+		$bok = CheckPic($g_IMG_PAUSE_MENU)
         $count += 1
         if $count > 5 then
             exitloop
