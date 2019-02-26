@@ -106,6 +106,7 @@ EndFunc
 
 Func SetFuocusWindow()
     WinActivate($g_RPLAY_WIN_TITLE)
+    Sleep(200)
     CheckInvalidWindow()
     Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
     if $aPos[2] <> $g_WindowWidth and $aPos[3] <> $g_WindowHight then
@@ -133,7 +134,9 @@ Func GetPS4RemoteWindowHandler()
 EndFunc
 
 Func GetPS4WindowPos()
-	return WinGetPos($g_RPLAY_WIN_TITLE)
+    Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
+    ;_log4a_Info("GetPS4WindowPos,x="&$aPos[0]&",y="&$aPos[1])
+    return $aPos
 EndFunc
 
 

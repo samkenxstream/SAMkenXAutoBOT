@@ -4,7 +4,7 @@
 
 
 
-if @ScriptName == "WatchDog.au3" then
+if @ScriptName == "PES2019_WatchDog.au3" then
 	
 endif
 

@@ -1,33 +1,27 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
 
-global const $IMAGE_SEARCH_SV = 5
-global const $MAINMENU_TOP_CARD_AREA[4] = [64,150,1220,190]
-global const $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = 0x352059
-global const $TAB_MATCH_START_X = 65
-global const $TAB_MATCH_END_X = 287
-global const $TAB_CLUBHOUSE_START_X = 298
-global const $TAB_CLUBHOUSE_END_X = 522
-global const $TAB_SIGN_START_X = 531
-global const $TAB_SIGN_END_X = 754
 
-global const $GAME_STAGE_MAINMENU = 1
-global const $GAME_STAGE_MATCHING = 2
-global const $GAME_STAGE_AFTER_MATCH = 3
-
-global const $MAINMENU_MIDCARD_HIGHT_LEFT 	= 1
-global const $MAINMENU_MIDCARD_HIGHT_MID 	= 2
-global const $MAINMENU_MIDCARD_HIGHT_RIGHT 	= 3
-
+global const $MAINMENU_TOPCARD_X_ARRAY[5] = [80,315,550,780,1016]
+global const $MAINMENU_TOPCARD_Y = 150
+global const $MAINMENU_TOPCARD_W = 190
+global const $MAINMENU_TOPCARD_H = 40
+global const $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = [0x352059]
 
 ;选项卡各个区域坐标
-global const $MAINMENU_MIDCARD_X1 = 442
-global const $MAINMENU_MIDCARD_X2 = 481
+global const $MAINMENU_MIDCARD_X1 = 130
+global const $MAINMENU_MIDCARD_X2 = 480
 global const $MAINMENU_MIDCARD_X3 = 837
-global const $MAINMENU_MIDCARD_Y = 442
+global const $MAINMENU_MIDCARD_Y = 440
 global const $MAINMENU_MIDCARD_W = 320
-global const $MAINMENU_MIDCARD_H = 133
-global const $MAINMENU_HIGHT_COLOR = 0x0C77EB 
+global const $MAINMENU_MIDCARD_H = 160
+global const $MAINMENU_MIDCARD_HIGHT_COLOR = [0x0C77EB,0x1980f3]
+
+global const $MAINMENU_MIDCARD_NONE     = 0
+global const $MAINMENU_MIDCARD_LEFT     = 1
+global const $MAINMENU_MIDCARD_MID      = 2
+global const $MAINMENU_MIDCARD_RIGHT    = 3
+
 
 ;球探星级区域
 global const $SCOUTS_LEVEL_W = 30
@@ -56,10 +50,11 @@ global const $CONFIRM_BTN_CANCEL_X = 292
 global const $CONFIRM_BTN_OK_X = 666
 
 ;主菜单的三个选项卡，比赛/CLUBHOUSE/签约
-global const $MAINMENU_TAB_MATCH 		= 1 ; 比赛菜单
-global const $MAINMENU_TAB_CLUBHOUSE 	= 2 ; club house
-global const $MAINMENU_TAB_SIGN 		= 3 ; 签约
-global const $MAINMENU_TAB_OTHER 		= 4 ; 其他菜单
+global const $MAINMENU_TOPTAB_MATCH 		= 1 ; 比赛菜单
+global const $MAINMENU_TOPTAB_CLUBHOUSE 	= 2 ; club house
+global const $MAINMENU_TOPTAB_SIGN 		    = 3 ; 签约
+global const $MAINMENU_TOPTAB_RECORD 		= 4 ; 记录
+global const $MAINMENU_TOPTAB_OPTION 		= 5 ; 选项
 
 
 #include "IncludeCommon.au3"
@@ -74,85 +69,59 @@ if @ScriptName == "PES2019_SCENES.au3" then
 endif
 
 
-Func CalcRect($area)
-	local $aPos = GetPS4WindowPos()
-	local $x1,$y1,$x2,$y2
-	local $rect[4]
-	if $area[0] == -1 then
-	  $x1 = $aPos[0]
-	else
-	  $x1 = $aPos[0] + $area[0]
-	endif
+Func CreateRectEx($x,$y,$w,$h)
+    local $aPos = GetPS4WindowPos()
+    local $rect[4]
+    local $x1,$y1,$x2,$y2
 
-	if $area[1] == -1 then
-	  $y1 = $aPos[1]
-	else
-	  $y1 = $aPos[1] + $area[1]
-	endif
+    $x1 = $aPos[0] + $x
+    $y1 = $aPos[1] + $y
+    $x2 = $x1 + $w - 1
+    $y2 = $y1 + $h - 1
 
-	if $area[2] == -1 then
-	  $x2 = $aPos[0] + $aPos[2] - 1
-	else
-	  $x2 = $aPos[0] + $area[2]
-	endif
-
-	if $area[3] == -1 then
-	  $y2 = $aPos[1] + $aPos[3] - 1
-	else
-	  $y2 = $aPos[1] + $area[3]
-	endif
-
-	$rect[0] = $x1
+    $rect[0] = $x1
 	$rect[1] = $y1
 	$rect[2] = $x2
 	$rect[3] = $y2
-	_log4a_Info("CalcRect:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
-	return $rect
+	_log4a_Info("CreateRectEx:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
+    return $rect
 EndFunc
 
-Func GetTabIndex()
-    $hwnd = GetPS4RemoteWindowHandler()
-    $hbitmap = GetScreenSnapshot($hwnd)
-    $card_area = CalcRect($MAINMENU_TOP_CARD_AREA)
+Func GetTopTabIndex()
+    For $i = 0 To UBound($MAINMENU_TOPCARD_X_ARRAY) - 1
+        local $rect = CreateRectEx($MAINMENU_TOPCARD_X_ARRAY[$i],$MAINMENU_TOPCARD_Y,$MAINMENU_TOPCARD_W,$MAINMENU_TOPCARD_H)
+        For $j = 0 to UBound($MAINMENU_TOP_CARD_HIGHLIGHT_COLOR) - 1
+            Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_TOP_CARD_HIGHLIGHT_COLOR[$j],$IMAGE_SEARCH_SV)
+            If not @error then
+                $index = ($i + 1)
+                _log4a_Info("GetTopTabIndex,find index:"&$index)
+                return $index
+            endif
+		next
+	next
 
-	Local $aCoord = PixelSearch($card_area[0],$card_area[1],$card_area[2],$card_area[3],$MAINMENU_TOP_CARD_HIGHLIGHT_COLOR,$IMAGE_SEARCH_SV)
-	If @error then
-		_log4a_Info("PixelSearch failed")
-		Local $iColor = PixelGetColor(629,305)
-		_log4a_Info("Current color is "&Hex($iColor, 6))
-	Else
-		_log4a_Info("PixelSearch found x="&$aCoord[0]&",y="&$aCoord[1])
-	EndIf
-
-	local $tabIndex = GetMainmenuTab($aCoord)
-
-	_log4a_Info("Find tab index="&$tabIndex)
-
-    return $tabIndex
+    _log4a_Info("GetTopTabIndex,find table card failed.")
+    ScreenCapture()
+    exit 0
 EndFunc
 
+Func GetMidTabIndex()
+    local $x_array[3] = [$MAINMENU_MIDCARD_X1,$MAINMENU_MIDCARD_X2,$MAINMENU_MIDCARD_X3]
 
-Func GetMainmenuTab($aCoord)
-	local $aPos = GetPS4WindowPos()
-	local $x = $aCoord[0] - $aPos[0]
+    For $i = 0 To UBound($x_array) - 1
+        local $rect = CreateRectEx($x_array[$i],$MAINMENU_MIDCARD_Y,$MAINMENU_MIDCARD_W,$MAINMENU_MIDCARD_H)
+        For $j = 0 to UBound($MAINMENU_MIDCARD_HIGHT_COLOR) - 1
+            Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_MIDCARD_HIGHT_COLOR,$IMAGE_SEARCH_SV)
+            If not @error then
+                $index = ($i + 1)
+                _log4a_Info("GetMidTabIndex,find index:"&$index)
+                return $index
+            endif
+        next
+    next
 
-	_log4a_Info("CheckMainmenuTab,x="&$x)
-
-	if $x >= $TAB_MATCH_START_X and $x <= $TAB_MATCH_END_X then
-		return $MAINMENU_TAB_MATCH
-	endif
-	if $x >= $TAB_CLUBHOUSE_START_X and $x <= $TAB_CLUBHOUSE_END_X then
-		return $MAINMENU_TAB_CLUBHOUSE
-	endif
-	if $x >= $TAB_SIGN_START_X and $x <= $TAB_SIGN_END_X then
-		return $MAINMENU_TAB_SIGN
-	endif
-
-	return $MAINMENU_TAB_OTHER
-EndFunc
-
-Func GetMainmenuMidTab()
-	
+    _log4a_Info("GetMidTabIndex,find table card failed.")
+    ScreenCapture()
 EndFunc
 
 

@@ -39,6 +39,11 @@ Global $g_RPLAY_GAME_CONTROL_CLASS = "[NAME:ViewPanel]"
 Global $g_PS4Macro_EXE_PATH = "C:\Users\lashw\Downloads\PS4Macro_0_5_2\PS4Macro.exe"
 Global $g_PS4Macro_EXE = "PS4Macro.exe"
 Global $g_PS4Macro_Title = "PS4 Macro - v0.5.2 (BETA)"
-
 Global $g_PicMatch_Threshold = 0.7
+Global $g_GameLoop_WatchDogTime = 120
+
+global const $GAME_STAGE_MAINMENU = 1
+global const $GAME_STAGE_MATCHING = 2
+global const $GAME_STAGE_AFTER_MATCH = 3
+global const $IMAGE_SEARCH_SV = 5
 
