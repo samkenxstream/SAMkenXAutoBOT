@@ -16,6 +16,35 @@ global const $GAME_STAGE_MATCHING = 2
 global const $GAME_STAGE_AFTER_MATCH = 3
 
 
+;选项卡各个区域坐标
+global const $MAINMENU_MIDCARD_X1 = 442
+global const $MAINMENU_MIDCARD_X2 = 481
+global const $MAINMENU_MIDCARD_X3 = 837
+global const $MAINMENU_MIDCARD_Y = 442
+global const $MAINMENU_MIDCARD_W = 320
+global const $MAINMENU_MIDCARD_H = 133
+
+
+;球探星级区域
+global const $SCOUTS_LEVEL_W = 30
+global const $SCOUTS_LEVEL_H = 30
+global const $SCOUTS_LEVEL_Y = 238
+global const $SCOUTS_LEVEL_X1 = 979
+global const $SCOUTS_LEVEL_X2 = 1017
+global const $SCOUTS_LEVEL_X3 = 1053
+global const $SCOUTS_LEVEL_X4 = 1088
+
+
+;请求谈判高亮区域
+global const $SOUTS_CONFIRM_X = 74
+global const $SOUTS_CONFIRM_Y = 487
+global const $SOUTS_CONFIRM_W = 556
+global const $SOUTS_CONFIRM_H = 57
+
+
+
+
+
 global const $MAINMENU_TAB_MATCH 		= 1 ; 比赛菜单
 global const $MAINMENU_TAB_CLUBHOUSE 	= 2 ; club house
 global const $MAINMENU_TAB_SIGN 		= 3 ; 签约
