@@ -18,6 +18,8 @@
 #include "HotKeyMgr.au3"
 #include "SmtpMailer.au3"
 #include "PES2019_SCENES.au3"
+#include "PES2019_WatchDog.au3"
+
 
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)
@@ -26,3 +28,5 @@ _OpenCV_Startup();loads opencv DLLs
 _GameResource_Startup()
 _KeyMap_Startup()
 _PS4_HotKey_Init()
+_log4a_SetLogFile($g_log_path)
+start_watch_dog()

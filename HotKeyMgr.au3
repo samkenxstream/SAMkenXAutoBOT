@@ -18,13 +18,14 @@ endif
 
 Func _PS4_HotKey_Init()
 	DirCreate($Screen_Shot_path)
-	HotKeySet("!p", "ScreenCapture") ; alt+p
+	HotKeySet("!p", "onScreenCapture") ; alt+p
 	HotKeySet("!k", "PrintWindowSize") ; alt+k
 	HotKeySet("!l", "SetWindowPos") ; alt+l
 EndFunc
 
 
 Func PrintWindowSize(); alt+k
+    SetFuocusWindow()
 	Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
 	_log4a_Info("screen_width="&@DeskTopWidth&",screen_hight="&@DeskTopHeight)
 	_log4a_Info("win pos:x="&$aPos[0]&",y="&$aPos[1]&",w="&$aPos[2]&",h="&$aPos[3])
@@ -37,16 +38,24 @@ Func PrintWindowSize(); alt+k
 
 EndFunc
 
-Func ScreenCapture()
+Func onScreenCapture()
+	ScreenCapture()
+EndFunc
+
+Func ScreenCapture($pic_suffix = "bmp")
 	_log4a_Info("ScreenCapture")
-	WinActivate($g_RPLAY_WIN_TITLE)
+    SetFuocusWindow()
+    WinActivate($g_RPLAY_WIN_TITLE)
     $hwnd = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
-	;Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd,Default,Default,Default,Default,False)
-    Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
-	_ScreenCapture_SaveImage($Screen_Shot_path&"image_"&@HOUR&"_"&@MIN&"_"&@SEC&".bmp",$hBitmap)
+	Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
+	Local $_suffix = $pic_suffix
+    Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&"."&$_suffix
+	_ScreenCapture_SaveImage($saved_screen_path,$hBitmap)
+    return $saved_screen_path
 EndFunc
 
 Func SetWindowPos()
     _log4a_Info("SetWindowPos")
+    SetFuocusWindow()
 	WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
 EndFunc

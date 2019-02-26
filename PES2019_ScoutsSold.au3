@@ -45,13 +45,8 @@ if @ScriptName == "PES2019_ScoutsSold.au3" then
 endif
 
 
-func scouts_sold_watch_dog_time_out()
-    _log4a_Info("scouts_sold_watch_dog_time_out")
-endfunc
-
 func start_scouts_sold_main_loop()
-    AdlibRegister("scouts_sold_watch_dog_time_out",$g_GameLoop_WatchDogTime*1000)
-	while (1)
+    while (1)
         ; 首先移动到签约窗口
         local $index_toptab = GetTopTabIndex()
         local $index_midtab = GetMidTabIndex()

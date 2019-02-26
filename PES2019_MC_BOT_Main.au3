@@ -5,13 +5,13 @@ Global $game_window_check_time = 2*1000
 Global $match_end_processing = False
 Global $email_sent = False
 Global $find_manager_renew_screen = False
-Global $g_log_path = @MyDocumentsDir&"\pes2019.log"
+
 Global $g_game_end_snapshot = @MyDocumentsDir&"\pes2019_game_finished.jpg"
 
 
 #include "IncludeCommon.au3"
 
-_log4a_SetLogFile($g_log_path)
+
 _PS4_GameWindow_StartUp()
 _log4a_Info("Start to play games")
 
@@ -34,7 +34,7 @@ Func DoKeyPress($arry_index,$hBitmap)
 			_KeyPress($g_KEY_ID_CIRCLE)
 			_KeyPress($g_KEY_ID_CIRCLE)
 			_KeyPress($g_KEY_ID_CIRCLE)
-            send_email($g_log_path&";"&$g_game_end_snapshot)
+            ;send_email($g_log_path&";"&$g_game_end_snapshot)
 			sleep(1000)
             ProcessClose($g_RPLAY_EXE)
             ProcessClose($g_PS4Macro_EXE)
