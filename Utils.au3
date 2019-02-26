@@ -61,3 +61,5 @@ Func _GetUnixTime($sDate = 0);Date Format: 2013/01/01 00:00:00 ~ Year/Mo/Da Hr:M
     Return _DateDiff('s', "1970/01/01 00:00:00", $utcTime)
 EndFunc   ;==>_GetUnixTime
 
+
+

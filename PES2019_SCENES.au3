@@ -1,7 +1,7 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
 
-global const $IMAGE_SEARCH_SV =5
+global const $IMAGE_SEARCH_SV = 5
 global const $MAINMENU_TOP_CARD_AREA[4] = [64,150,1220,190]
 global const $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = 0x352059
 global const $TAB_MATCH_START_X = 65
@@ -15,6 +15,10 @@ global const $GAME_STAGE_MAINMENU = 1
 global const $GAME_STAGE_MATCHING = 2
 global const $GAME_STAGE_AFTER_MATCH = 3
 
+global const $MAINMENU_MIDCARD_HIGHT_LEFT 	= 1
+global const $MAINMENU_MIDCARD_HIGHT_MID 	= 2
+global const $MAINMENU_MIDCARD_HIGHT_RIGHT 	= 3
+
 
 ;选项卡各个区域坐标
 global const $MAINMENU_MIDCARD_X1 = 442
@@ -23,7 +27,7 @@ global const $MAINMENU_MIDCARD_X3 = 837
 global const $MAINMENU_MIDCARD_Y = 442
 global const $MAINMENU_MIDCARD_W = 320
 global const $MAINMENU_MIDCARD_H = 133
-
+global const $MAINMENU_HIGHT_COLOR = 0x0C77EB 
 
 ;球探星级区域
 global const $SCOUTS_LEVEL_W = 30
@@ -33,22 +37,30 @@ global const $SCOUTS_LEVEL_X1 = 979
 global const $SCOUTS_LEVEL_X2 = 1017
 global const $SCOUTS_LEVEL_X3 = 1053
 global const $SCOUTS_LEVEL_X4 = 1088
-
+global const $SCOUTS_HIGHT_COLOR = 0xFFB423
 
 ;请求谈判高亮区域
-global const $SOUTS_CONFIRM_X = 74
-global const $SOUTS_CONFIRM_Y = 487
-global const $SOUTS_CONFIRM_W = 556
-global const $SOUTS_CONFIRM_H = 57
+global const $SCOUTS_CONFIRM_X = 74
+global const $SCOUTS_CONFIRM_Y = 487
+global const $SCOUTS_CONFIRM_W = 556
+global const $SCOUTS_CONFIRM_H = 57
+global const $SCOUTS_CONFIRM_HIGHT_COLOR = 0x2790ff
 
 
+;确认菜单高亮区域
+global const $CONFIRM_HIGHT_COLOR = 0x258eff
+global const $CONFIRM_BTN_W = 336
+global const $CONFIRM_BTN_H = 53
+global const $CONFIRM_BTN_Y = 460
+global const $CONFIRM_BTN_CANCEL_X = 292
+global const $CONFIRM_BTN_OK_X = 666
 
-
-
+;主菜单的三个选项卡，比赛/CLUBHOUSE/签约
 global const $MAINMENU_TAB_MATCH 		= 1 ; 比赛菜单
 global const $MAINMENU_TAB_CLUBHOUSE 	= 2 ; club house
 global const $MAINMENU_TAB_SIGN 		= 3 ; 签约
 global const $MAINMENU_TAB_OTHER 		= 4 ; 其他菜单
+
 
 #include "IncludeCommon.au3"
 
@@ -112,7 +124,7 @@ Func GetTabIndex()
 		_log4a_Info("PixelSearch found x="&$aCoord[0]&",y="&$aCoord[1])
 	EndIf
 
-	local $tabIndex = CheckMainmenuTab($aCoord)
+	local $tabIndex = GetMainmenuTab($aCoord)
 
 	_log4a_Info("Find tab index="&$tabIndex)
 
@@ -120,7 +132,7 @@ Func GetTabIndex()
 EndFunc
 
 
-Func CheckMainmenuTab($aCoord)
+Func GetMainmenuTab($aCoord)
 	local $aPos = GetPS4WindowPos()
 	local $x = $aCoord[0] - $aPos[0]
 
@@ -138,6 +150,11 @@ Func CheckMainmenuTab($aCoord)
 
 	return $MAINMENU_TAB_OTHER
 EndFunc
+
+Func GetMainmenuMidTab()
+	
+EndFunc
+
 
 ;是否在比赛界面,判断依据
 ;按Option,出现暂停菜单,就是比赛中
