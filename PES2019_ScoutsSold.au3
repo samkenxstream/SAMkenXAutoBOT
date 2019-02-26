@@ -83,60 +83,65 @@ func start_scouts_sold_main_loop()
     ;进入设定球探界面
     ; TODO: do the loop for all the below 3 scouts.
 
-    local $star
     while (1)
-        $star = find_scout_star()
-        if $star == 0 then
-            _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(1000)
-        else
+        local $star
+        while (1)
+            $star = find_scout_star()
+            if $star == 0 then
+                _KeyPress($g_KEY_ID_CIRCLE)
+                Sleep(1000)
+            else
+                ExitLoop
+            endif
+            Sleep(500)
+        wend
+        
+        if $star > 3 then
+            _log4a_Info("all the scouts have been used.")
             ExitLoop
         endif
+
+        ;找到请求谈判按钮
+        while (1)
+            local $request_highted = check_scout_request_highted()
+            if not $request_highted then
+                _KeyPress($g_KEY_ID_DOWN)
+                Sleep(1000)
+            else
+                _KeyPress($g_KEY_ID_CIRCLE)
+                Sleep(500)
+                ExitLoop
+            endif
+            Sleep(500)
+        wend
+
+        ;请求确认按钮
+        while (1)
+            if not check_confirm_button() then
+                _KeyPress($g_KEY_ID_RIGHT)
+                Sleep(500)
+            else
+                ExitLoop
+            endif
+        wend
+
+        _KeyPress($g_KEY_ID_CIRCLE)
+        Sleep(1000)
+        _KeyPress($g_KEY_ID_OPTION)
         Sleep(500)
+
+        while(1)
+
+            if not find_scout_screen() then
+                _KeyPress($g_KEY_ID_CIRCLE)
+                Sleep(500)
+            else
+                _log4a_Info("finished")
+                ExitLoop
+            endif
+        wend
     wend
-
-    ;找到请求谈判按钮
-    while (1)
-        local $request_highted = check_scout_request_highted()
-        if not $request_highted then
-            _KeyPress($g_KEY_ID_DOWN)
-            Sleep(1000)
-        else
-            _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(500)
-            ExitLoop
-        endif
-        Sleep(500)
-    wend
-
-    ;请求确认按钮
-    while (1)
-        if not check_confirm_button() then
-            _KeyPress($g_KEY_ID_RIGHT)
-            Sleep(500)
-        else
-            ExitLoop
-        endif
-    wend
-
-    _KeyPress($g_KEY_ID_CIRCLE)
-    Sleep(1000)
-    _KeyPress($g_KEY_ID_OPTION)
-    Sleep(500)
-
-    while(1)
-
-        if not find_scout_screen() then
-            _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(500)
-        else
-            _log4a_Info("finished")
-            ExitLoop
-        endif
-    wend
-
-
-
+    
 EndFunc
 
 
