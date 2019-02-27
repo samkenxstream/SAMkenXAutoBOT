@@ -83,8 +83,6 @@ endfunc
 
 
 func find_scouts_menu()
-	local $loop_count = 0
-
 	while (1)
         ; 首先移动到签约窗口
         local $index_toptab = GetTopTabIndex()
@@ -111,11 +109,6 @@ func find_scouts_menu()
         endif
 
         Sleep(500)
-		$loop_count += 1
-
-		if $loop_count > $MAX_STATE_CHECK_COUNT then
-			handle_process_error()
-		endif
     wend
 endfunc
 

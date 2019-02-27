@@ -17,22 +17,12 @@ global const $MAINMENU_MIDCARD_W = 320
 global const $MAINMENU_MIDCARD_H = 160
 global const $MAINMENU_MIDCARD_UNSELECT_COLOR = 0xdcd8d1
 
-global const $MAINMENU_MIDCARD_NONE     = 0
-global const $MAINMENU_MIDCARD_LEFT     = 1
-global const $MAINMENU_MIDCARD_MID      = 2
-global const $MAINMENU_MIDCARD_RIGHT    = 3
 
 
 
 
 
 
-;主菜单的三个选项卡，比赛/CLUBHOUSE/签约
-global const $MAINMENU_TOPTAB_MATCH 		= 1 ; 比赛菜单
-global const $MAINMENU_TOPTAB_CLUBHOUSE 	= 2 ; club house
-global const $MAINMENU_TOPTAB_SIGN 		    = 3 ; 签约
-global const $MAINMENU_TOPTAB_RECORD 		= 4 ; 记录
-global const $MAINMENU_TOPTAB_OPTION 		= 5 ; 选项
 
 
 #include "IncludeCommon.au3"
@@ -129,8 +119,7 @@ EndFunc
 
 Func find_in_mainmenu()
 	local $index_toptab = GetTopTabIndex()
-	local $index_midtab = GetMidTabIndex()
-	if $index_toptab <> -1 and $index_midtab <> -1 then
+	if $index_toptab <> -1 then
 		return true
 	endif
 	

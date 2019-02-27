@@ -13,7 +13,7 @@ global const $SQUADLIST_UN_SELECT_COLOR_2 = 0Xada8a3
 global const $SQUADLIST_CONFIG_PATH = @ScriptDir&"\squad_list_config.ini"
 global $g_white_ball_squad_array[0]
 global $g_exp_earn_squad_array[0]
-global $g_total_squad_list[0]
+global $g_total_squad_array[0]
 global $g_current_squad_index = -1
 
 
@@ -29,6 +29,7 @@ if @ScriptName == "PES2019_SquadSelect.au3" then
 	; $index = get_squad_list_hight_index()
 	; _log4a_Info("get_squad_list_hight_index:"&$index)
 	; get_sim_squad_in_list()
+    select_sim_squad()
 endif
 
 func _squad_select_startup()
@@ -53,62 +54,55 @@ func _squad_select_startup()
 		endif
 	next
 
-	_ArrayAdd($g_total_squad_list,$g_white_ball_squad_array)
-	_ArrayAdd($g_total_squad_list,$g_exp_earn_squad_array)
+	_ArrayAdd($g_total_squad_array,$g_white_ball_squad_array)
+	_ArrayAdd($g_total_squad_array,$g_exp_earn_squad_array)
+    $g_current_squad_index = 0
 	;_ArrayDisplay($g_total_squad_list)
 endfunc
 
+func select_sim_squad()
+    $active_squad_index = $g_total_squad_array[$g_current_squad_index]
 
+    while not find_squad_list_title()
+        _KeyPress($g_KEY_ID_SQUARE)
+        Sleep(1500)
+    wend
 
-; 当前小队选择列表
-func get_squad_list_hight_index()
-	for $i = 0 To UBound($SQUADLIST_POX_Y) - 1
-		local $rect = CreateRectEx($SQUADLIST_POX_X,$SQUADLIST_POX_Y[$i],$SQUADLIST_POX_W,$SQUADLIST_POX_H)
-		Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$SQUADLIST_UN_SELECT_COLOR,$IMAGE_SEARCH_SV)
-		If not @error then
-			continueLoop
-		endif
-		$aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$SQUADLIST_UN_SELECT_COLOR_2,$IMAGE_SEARCH_SV)
-		If not @error then
-			continueLoop
-		endif
+    _log4a_Info("select_sim_squad,active_squad_index:"&$active_squad_index)
 
-		; find it
-		$index = $i + 1
-		return $index
-	next
+    for $i = 1 to $active_squad_index
+        _KeyPress($g_KEY_ID_DOWN)
+        Sleep(1500)
+    next
 
-	return -1
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(5000)
+
+    while not find_in_mainmenu()
+        Sleep(5000)
+    wend
+
 endfunc
 
 
-func load_squad_list()
-	_KeyPress($g_KEY_ID_LEFT)
-	Sleep(500)
+func squad_list_on_match_finished()
+    $total_squad = UBound($g_total_squad_array)
+    $g_current_squad_index += 1
+    $g_current_squad_index = $g_current_squad_index/$total_squad
+endfunc
 
-	while (1)
+func find_squad_list_title()
+    $bFound = CheckPic($g_IMG_SQUAD_LIST_TITLE)
+    return $bFound
+endfunc
 
-		$index = get_squad_list_hight_index()
-
-		if $index == -1 then
-			_log4a_Info("load_squad_list failed")
-			cancel_watch_dog()
-			on_watch_dog_timeout()
-			exitloop
-		endif
-
-		if $index <> 1 then
-			_KeyPress($g_KEY_ID_LEFT)
-			Sleep(500)
-			continueLoop
-		endif
-
-		;查找当前页的小队名称
-		for $i = 1 To UBound($SQUADLIST_POX_Y) - 1
-
-		next
-	wend
-
+func set_current_squad_invalid()
+    _ArrayDelete($g_total_squad_array, $g_current_squad_index)
+    if UBound($g_total_squad_array) == 0 then
+        _log4a_Info("No valid squad found, exit script")
+        send_email("All squad used","All squad used, scipt end")
+        exit 0
+    endif
 
 endfunc
 

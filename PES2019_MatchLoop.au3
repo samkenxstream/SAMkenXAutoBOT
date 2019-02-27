@@ -1,0 +1,110 @@
+#AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
+#include-once
+
+
+#include "IncludeCommon.au3"
+
+if @ScriptName == "PES2019_MatchLoop.au3" then
+    CheckPic($g_IMG_MATCH_END)
+    CheckPic($g_IMG_SQUAD_INVALID)
+endif
+
+
+global $g_match_end = false
+
+func on_match_main_loop()
+    $g_match_end = false
+    Sleep(15000)
+    _KeyPress($g_KEY_ID_CIRCLE)
+    AdlibRegister("in_match_checking",2000)
+endfunc
+
+func on_match_end_loop()
+    AdlibUnRegister("in_match_checking")
+    AdlibRegister("after_match_checking",1000)
+    SetFuocusWindow()
+    $path = ScreenCapture()
+    send_email("PES2019 SIM Match Report by auto","PES2019 SIM Match End",$g_log_path&";"&$path)
+    reset_watch_dog()
+endfunc
+
+func in_match_checking()
+
+    ; 比赛结束界面
+    $bok = CheckPic($g_IMG_MATCH_END)
+    if $bok then
+        on_match_end_loop()
+        return
+    endif
+    
+    ; 跳过动画
+    $bok = CheckPic($g_IMG_GAME_REPLAY)
+    if $bok then
+        _KeyPress($g_KEY_ID_OPTION)
+        Sleep(1000)
+        return 
+    endif
+    
+    
+    ; 跳过动画
+    $bok = CheckPic($g_IMG_GAME_REPLAY_2)
+    if $bok then
+        _KeyPress($g_KEY_ID_OPTION)
+        Sleep(1000)
+        return
+    endif
+
+    ; 手柄选择菜单
+    $bok = CheckPic($g_IMG_USER_SELECT_MENU)
+    if $bok then
+        _KeyPress($g_KEY_ID_CROSS)
+        Sleep(1000)
+        return
+    endif
+    
+    ; 暂停菜单
+    $bok = CheckPic($g_IMG_PAUSE_MENU)
+    if $bok then
+        _KeyPress($g_KEY_ID_CROSS)
+        Sleep(1000)
+        return
+    endif
+    
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(1000)
+    
+endfunc
+
+func after_match_checking()
+    ; 主教练合约更新
+    $bok = CheckPic($g_IMG_RECONTRACT_MANGER_NOTIFY)
+    if $bok then 
+        ; 重复按右键三次,确保选中是
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(1000)
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(1000)
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(1000)
+        _KeyPress($g_KEY_ID_CIRCLE)
+        Sleep(1000)
+        return
+    endif
+    
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(1000)
+    
+    if find_in_mainmenu() then 
+        on_match_end()
+    endif
+    AdlibUnRegister("after_match_checking")
+endfunc
+
+
+func on_match_end()
+    $g_match_end = true
+endfunc
+
+func is_match_end()
+    return $g_match_end
+endfunc
