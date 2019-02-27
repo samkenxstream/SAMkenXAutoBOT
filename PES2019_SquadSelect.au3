@@ -105,6 +105,7 @@ func set_current_squad_invalid()
     if UBound($g_total_squad_array) == 0 then
         _log4a_Info("No valid squad found, exit script")
         send_email("All squad used","All squad used, scipt end")
+        Sleep(10000)
         exit 0
     endif
 
