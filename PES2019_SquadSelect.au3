@@ -29,7 +29,9 @@ if @ScriptName == "PES2019_SquadSelect.au3" then
 	; $index = get_squad_list_hight_index()
 	; _log4a_Info("get_squad_list_hight_index:"&$index)
 	; get_sim_squad_in_list()
-    select_sim_squad()
+    ; select_sim_squad()
+    $value = mod(4,2)
+    _log4a_Info("value="&$value);
 endif
 
 func _squad_select_startup()
@@ -88,7 +90,7 @@ endfunc
 func squad_list_on_match_finished()
     $total_squad = UBound($g_total_squad_array)
     $g_current_squad_index += 1
-    $g_current_squad_index = $g_current_squad_index/$total_squad
+    $g_current_squad_index = mod($g_current_squad_index,$total_squad)
     _log4a_Info("squad_list_on_match_finished,index="&$g_current_squad_index)
 endfunc
 
