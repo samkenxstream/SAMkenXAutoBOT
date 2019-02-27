@@ -41,10 +41,10 @@ Func PrintWindowSize(); alt+k
 EndFunc
 
 Func onScreenCapture()
-	ScreenCapture()
+	ScreenCapture("bmp")
 EndFunc
 
-Func ScreenCapture($pic_suffix = "bmp")
+Func ScreenCapture($pic_suffix = "jpg")
 	_log4a_Info("ScreenCapture")
     SetFuocusWindow()
     WinActivate($g_RPLAY_WIN_TITLE)
