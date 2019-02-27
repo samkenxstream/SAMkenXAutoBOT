@@ -31,6 +31,6 @@ _OpenCV_Startup();loads opencv DLLs
 _GameResource_Startup()
 _KeyMap_Startup()
 _squad_select_startup()
-_PS4_HotKey_Init()
+;_PS4_HotKey_Init()
 _log4a_SetLogFile($g_log_path)
 start_watch_dog()
