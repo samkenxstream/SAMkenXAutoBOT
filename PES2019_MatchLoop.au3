@@ -26,6 +26,12 @@ func on_match_end_loop()
     $path = ScreenCapture()
     send_email("PES2019 SIM Match Report by auto","PES2019 SIM Match End",$g_log_path&";"&$path)
     reset_watch_dog()
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(2000)
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(2000)
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(2000)
 endfunc
 
 func in_match_checking()
@@ -92,9 +98,11 @@ func after_match_checking()
     endif
     
     _KeyPress($g_KEY_ID_CIRCLE)
-    Sleep(1000)
+    Sleep(2000)
     
-    if find_in_mainmenu() then 
+    $bok = CheckPic($g_IMG_TEAM_MANAGER_ITEM)
+    
+    if $bok then 
         on_match_end()
     endif
     

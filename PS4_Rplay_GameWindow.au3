@@ -109,9 +109,7 @@ Func SetFuocusWindow()
     Sleep(200)
     CheckInvalidWindow()
     Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
-    if $aPos[2] <> $g_WindowWidth and $aPos[3] <> $g_WindowHight then
-        WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
-    endif
+    WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
 EndFunc
 
 Func GetScreenSnapshot($hwnd = 0)

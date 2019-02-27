@@ -32,8 +32,9 @@ local const $gp_team_list[] = [$g_IMG_GP_TEAM_1,$g_IMG_GP_TEAM_2]
 
 
 if @ScriptName == "PES2019_SCENES.au3" then
-    ;GetTabIndex()
-    CheckInMatchingStage()
+    GetTopTabIndex()
+    ;CheckInMatchingStage()
+    CheckPic($g_IMG_TEAM_MANAGER_ITEM)
 endif
 
 
@@ -122,7 +123,7 @@ Func find_in_mainmenu()
 	if $index_toptab <> -1 then
 		return true
 	endif
-	
+
 	return false
 EndFunc
 
