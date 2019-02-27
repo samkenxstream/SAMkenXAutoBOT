@@ -19,7 +19,7 @@ global const $SQUADLIST_UN_SELECT_COLOR_2 = 0Xada8a3
 if @ScriptName == "PES2019_SquadSelect.au3" then
 	SetFuocusWindow()
 	$index = get_squad_list_hight_index()
-	_log4a_Info("get_squad_list_hight_index:" + $index)
+	_log4a_Info("get_squad_list_hight_index:"&$index)
 endif
 
 
@@ -36,12 +36,12 @@ func get_squad_list_hight_index()
 		If not @error then
 			continueLoop
 		endif
-		
+
 		; find it
 		$index = $i + 1
 		return $index
 	next
-	
+
 	return -1
 endfunc
 
@@ -49,30 +49,30 @@ endfunc
 func load_squad_list()
 	_KeyPress($g_KEY_ID_LEFT)
 	Sleep(500)
-		
+
 	while (1)
-		
+
 		$index = get_squad_list_hight_index()
-		
+
 		if $index == -1 then
 			_log4a_Info("load_squad_list failed")
 			cancel_watch_dog()
 			on_watch_dog_timeout()
 			exitloop
 		endif
-		
+
 		if $index <> 1 then
 			_KeyPress($g_KEY_ID_LEFT)
 			Sleep(500)
 			continueLoop
 		endif
-		
+
 		;查找当前页的小队名称
 		for $i = 1 To UBound($SQUADLIST_POX_Y) - 1
-			
+
 		next
 	wend
-	
-	
-endif
+
+
+endfunc
 
