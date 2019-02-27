@@ -79,7 +79,7 @@ func after_match_checking()
     ; 主教练合约更新
     $bok = CheckPic($g_IMG_RECONTRACT_MANGER_NOTIFY)
     if $bok then 
-        ; 重复按右键三次,确保选中是
+        ; 重复按右键三次,确保选中合约更新
         _KeyPress($g_KEY_ID_RIGHT)
         Sleep(1000)
         _KeyPress($g_KEY_ID_RIGHT)
@@ -97,12 +97,13 @@ func after_match_checking()
     if find_in_mainmenu() then 
         on_match_end()
     endif
-    AdlibUnRegister("after_match_checking")
+    
 endfunc
 
 
 func on_match_end()
     $g_match_end = true
+    AdlibUnRegister("after_match_checking")
 endfunc
 
 func is_match_end()

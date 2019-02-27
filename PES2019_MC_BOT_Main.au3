@@ -17,8 +17,7 @@ _log4a_Info("Start to play games")
 ; 4.选择下一个SIM小队
 
 SetFuocusWindow()
-Sleep(20000)
-
+Sleep(5000)
 
 While(1)
     back_to_top_menu()
@@ -28,7 +27,7 @@ While(1)
     Sleep(1000)
     move_to_sim_match_menu()
     Sleep(1000)
-    
+
     ; press start key
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(1000)
@@ -39,14 +38,14 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
-    
+
     on_match_main_loop()
-    
+
     ; wait for match exit
     while not on_match_end()
         Sleep(10000)
     wend
-    
+
     squad_list_on_match_finished()
 WEnd
 
