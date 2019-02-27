@@ -16,10 +16,10 @@ _log4a_Info("Start to play games")
 ; 3.等待比赛结束回到主菜单
 ; 4.选择下一个SIM小队
 
-SetFuocusWindow()
-Sleep(5000)
 
 While(1)
+    SetFuocusWindow()
+    Sleep(5000)
     back_to_top_menu()
     move_to_squad_menu()
     Sleep(1000)
@@ -40,12 +40,11 @@ While(1)
     endif
 
     on_match_main_loop()
-
     ; wait for match exit
-    while not on_match_end()
-        Sleep(10000)
+    while not is_match_end()
+        Sleep(1000)
     wend
-
+    _log4a_Info("on_match_end()")
     squad_list_on_match_finished()
 WEnd
 

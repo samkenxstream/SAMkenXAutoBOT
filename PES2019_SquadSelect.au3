@@ -89,6 +89,7 @@ func squad_list_on_match_finished()
     $total_squad = UBound($g_total_squad_array)
     $g_current_squad_index += 1
     $g_current_squad_index = $g_current_squad_index/$total_squad
+    _log4a_Info("squad_list_on_match_finished,index="&$g_current_squad_index)
 endfunc
 
 func find_squad_list_title()
@@ -97,6 +98,7 @@ func find_squad_list_title()
 endfunc
 
 func set_current_squad_invalid()
+    _log4a_Info("set_current_squad_invalid")
     _ArrayDelete($g_total_squad_array, $g_current_squad_index)
     if UBound($g_total_squad_array) == 0 then
         _log4a_Info("No valid squad found, exit script")
