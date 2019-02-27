@@ -18,9 +18,11 @@ endif
 
 Func _PS4_HotKey_Init()
 	DirCreate($Screen_Shot_path)
-	HotKeySet("!p", "onScreenCapture") ; alt+p
-	HotKeySet("!k", "PrintWindowSize") ; alt+k
-	HotKeySet("!l", "SetWindowPos") ; alt+l
+	HotKeySet("^p", "onScreenCapture") 	; ctrl+p
+	HotKeySet("^k", "PrintWindowSize") 	; ctrl+k
+	HotKeySet("^l", "SetWindowPos") 	; ctrl+l
+	HotKeySet("^q", "QuitScript") 	; ctrl+q
+	
 EndFunc
 
 
@@ -58,4 +60,10 @@ Func SetWindowPos()
     _log4a_Info("SetWindowPos")
     SetFuocusWindow()
 	WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
+EndFunc
+
+
+
+Func QuitScript()
+	exit 0
 EndFunc
