@@ -18,7 +18,7 @@ Global const $g_IMG_GP_TEAM_2                   = 15
 Global const $g_IMG_SCOUT_ICON_SELECTED         = 16
 Global const $g_IMG_STRING_SIM 					= 17
 Global const $g_IMG_STRING_WHITE_BALL			= 18
-
+Global const $g_IMG_STRING_TRAINING				= 19
 
 
 Global const $g_IMG_NUM_MAX = 100
@@ -57,6 +57,7 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_SCOUT_ICON_SELECTED] = "mainmenu_scout_icon_selected.bmp"
     $g_GAME_PIC_ARRAY[$g_IMG_STRING_SIM] = "squad_list_string_sim.png"
 	$g_GAME_PIC_ARRAY[$g_IMG_STRING_WHITE_BALL] = "squad_list_string_whiteball.png"
+	$g_GAME_PIC_ARRAY[$g_IMG_STRING_TRAINING] = "squad_list_string_training.png"
 
 EndFunc
 
