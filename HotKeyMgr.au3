@@ -18,11 +18,11 @@ endif
 
 Func _PS4_HotKey_Init()
 	DirCreate($Screen_Shot_path)
-	HotKeySet("^p", "onScreenCapture") 	; ctrl+p
-	HotKeySet("^k", "PrintWindowSize") 	; ctrl+k
-	HotKeySet("^l", "SetWindowPos") 	; ctrl+l
-	HotKeySet("^q", "QuitScript") 	; ctrl+q
-	
+	HotKeySet("^q", "onScreenCapture") 	; ctrl+1
+	HotKeySet("^w", "PrintWindowSize") 	; ctrl+2
+	HotKeySet("^e", "SetWindowPos") 	; ctrl+3
+	HotKeySet("^r", "QuitScript") 	    ; ctrl+4
+
 EndFunc
 
 

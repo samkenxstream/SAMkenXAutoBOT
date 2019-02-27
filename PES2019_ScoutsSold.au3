@@ -16,7 +16,7 @@ global const $SCOUTS_UNHIGHT_COLOR = 0x5E5F58
 ;请求谈判高亮区域
 global const $SCOUTS_CONFIRM_X = 74
 global const $SCOUTS_CONFIRM_Y = 487
-global const $SCOUTS_CONFIRM_W = 556
+global const $SCOUTS_CONFIRM_W = 200
 global const $SCOUTS_CONFIRM_H = 57
 global const $SCOUTS_CONFIRM_UNHIGHT_COLOR = 0xf1f0eb
 
@@ -36,8 +36,8 @@ global const $MAX_STATE_CHECK_COUNT = 100
 global const $SCOUTS_STATE_INIT 			= 1 ; 初始状态，回到主菜单
 global const $SCOUTS_STATE_FOUND_SCOUTS 	= 2 ; 选择球探界面
 global const $SCOUTS_STATE_MOVE_TO_REQUEST 	= 3	; 移动到请求谈判按钮
-global const $SCOUTS_STATE_CONFIRM_REQUEST 	= 4	; 移动到请求谈判按钮
-global const $SCOUTS_STATE_REQUEST_WAITING 	= 5	; 移动到请求谈判按钮
+global const $SCOUTS_STATE_CONFIRM_REQUEST 	= 4	; 确定按钮
+global const $SCOUTS_STATE_REQUEST_WAITING 	= 5	; 或者球员等待动画
 global const $SCOUTS_STATE_DONE 			= 6 ; 状态结束
 global const $BACK_TO_MAIN					= 7 ; 退回到主菜单
 
@@ -123,13 +123,13 @@ endfunc
 func scouts_move_to_next_state($state)
 
 	switch($state)
-		case $SCOUTS_STATE_FOUND_SCOUTS 
+		case $SCOUTS_STATE_FOUND_SCOUTS
 			return $SCOUTS_STATE_MOVE_TO_REQUEST
-		case $SCOUTS_STATE_MOVE_TO_REQUEST 
+		case $SCOUTS_STATE_MOVE_TO_REQUEST
 			return $SCOUTS_STATE_CONFIRM_REQUEST
-		case $SCOUTS_STATE_CONFIRM_REQUEST 
+		case $SCOUTS_STATE_CONFIRM_REQUEST
 			return $SCOUTS_STATE_REQUEST_WAITING
-		case $SCOUTS_STATE_REQUEST_WAITING 
+		case $SCOUTS_STATE_REQUEST_WAITING
 			return $SCOUTS_STATE_FOUND_SCOUTS
 		case $SCOUTS_STATE_DONE
 			return $BACK_TO_MAIN
@@ -138,7 +138,7 @@ func scouts_move_to_next_state($state)
 		case Else
 			return $state
 	endswitch
-	
+
 	return $state
 endfunc
 
@@ -165,25 +165,30 @@ func scouts_sold_loop()
 			return true
 
 		case $SCOUTS_STATE_MOVE_TO_REQUEST
-			local $request_highted = check_scout_request_highted()
-			if not $request_highted then
-				_KeyPress($g_KEY_ID_DOWN)
-				Sleep(500)
-				return false
-			else
-				_KeyPress($g_KEY_ID_CIRCLE)
-				Sleep(500)
-				return true
-			endif
+            _KeyPress($g_KEY_ID_DOWN)
+            Sleep(1000)
+            _KeyPress($g_KEY_ID_DOWN)
+            Sleep(1000)
+            _KeyPress($g_KEY_ID_DOWN)
+            Sleep(1000)
+
+            while not check_scout_request_highted()
+                Sleep(1000)
+            wend
+
+            _KeyPress($g_KEY_ID_CIRCLE)
+            Sleep(1000)
+            return true
 
 		case $SCOUTS_STATE_CONFIRM_REQUEST
-			if not check_confirm_button() then
-				_KeyPress($g_KEY_ID_RIGHT)
-				Sleep(500)
-				return false
-			else
-				return true
-			endif
+            _KeyPress($g_KEY_ID_RIGHT)
+			Sleep(1000)
+            _KeyPress($g_KEY_ID_RIGHT)
+			Sleep(1000)
+            _KeyPress($g_KEY_ID_CIRCLE)
+            Sleep(500)
+            return true
+
 		case $SCOUTS_STATE_REQUEST_WAITING
 			if not find_scout_screen() then
 				_KeyPress($g_KEY_ID_OPTION)
@@ -205,7 +210,7 @@ func scouts_sold_loop()
 			return false
 
 	endswitch
-	
+
 	return false
 
 endfunc

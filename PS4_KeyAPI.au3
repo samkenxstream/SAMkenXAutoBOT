@@ -18,7 +18,7 @@ Global $g_KEY_ID_R1          = 12
 Global $g_KEY_ID_L2          = 13
 Global $g_KEY_ID_R2          = 14
 Global const $g_KEY_ID_MAX   = 20
-Global const $g_DEFAULT_KEYDOWN_DELAY = 80
+Global const $g_DEFAULT_KEYDOWN_DELAY = 200
 
 Global $g_KEY_MAP[$g_KEY_ID_MAX]
 

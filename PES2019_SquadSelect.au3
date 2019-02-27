@@ -14,7 +14,7 @@ global const $SQUADLIST_CONFIG_PATH = @ScriptDir&"\squad_list_config.ini"
 global $g_white_ball_squad_array[0]
 global $g_exp_earn_squad_array[0]
 global $g_total_squad_list[0]
-
+global $g_current_squad_index = -1
 
 
 #include "IncludeCommon.au3"
@@ -59,16 +59,8 @@ func _squad_select_startup()
 endfunc
 
 
-func get_sim_squad_in_list()
-	for $i = 1 To UBound($SQUADLIST_POX_Y) - 1
-		local $rect = CreateRectEx($SQUADLIST_POX_X,$SQUADLIST_POX_Y[$i],$SQUADLIST_POX_W,$SQUADLIST_POX_H)
-		local $bfound = CheckPic($g_IMG_STRING_SIM,$rect)
-		local $bfound = CheckPic($g_IMG_STRING_WHITE_BALL,$rect)
 
-	next
-endfunc
-
-
+; 当前小队选择列表
 func get_squad_list_hight_index()
 	for $i = 0 To UBound($SQUADLIST_POX_Y) - 1
 		local $rect = CreateRectEx($SQUADLIST_POX_X,$SQUADLIST_POX_Y[$i],$SQUADLIST_POX_W,$SQUADLIST_POX_H)
