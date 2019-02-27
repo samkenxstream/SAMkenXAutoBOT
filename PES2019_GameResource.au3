@@ -16,7 +16,7 @@ Global const $g_IMG_GAME_REPLAY_2               = 13
 Global const $g_IMG_GP_TEAM_1                   = 14
 Global const $g_IMG_GP_TEAM_2                   = 15
 Global const $g_IMG_SCOUT_ICON_SELECTED         = 16
-
+Global const $g_IMG_STRING_SIM 					= 17
 
 Global const $g_IMG_NUM_MAX = 100
 Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
@@ -52,7 +52,7 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_GP_TEAM_1] = "gp_team_1.png"
     $g_GAME_PIC_ARRAY[$g_IMG_GP_TEAM_2] = "gp_team_2.png"
     $g_GAME_PIC_ARRAY[$g_IMG_SCOUT_ICON_SELECTED] = "mainmenu_scout_icon_selected.bmp"
-    
+    $g_GAME_PIC_ARRAY[$g_IMG_STRING_SIM] = "squad_list_string_sim.png"
 
 EndFunc
 
@@ -81,12 +81,18 @@ Func CheckGameState($hBitmap,$Threshold,$onMatched)
 
 EndFunc
 
-Func CheckPic($img_id)
+Func CheckPic($img_id,$area = False)
+	Local $hBitmap
+
     $pic_name = $g_GAME_PIC_ARRAY[$img_id]
     $Match_Pic = @ScriptDir&"\pes2019_img_search\"&$pic_name
     $hwnd = GetPS4RemoteWindowHandler()
-    
-    Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
+    If IsArray($area) Then
+		$hBitmap = _ScreenCapture_CaptureWnd("", $hwnd,$area[0],$area[1],$area[2],$area[3])
+	else
+		$hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
+	endif
+
     $Match = _MatchPicture($Match_Pic,$hBitmap, $g_PicMatch_Threshold)
     If Not @error Then
         ;Find match pic

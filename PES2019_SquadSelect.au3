@@ -20,9 +20,16 @@ if @ScriptName == "PES2019_SquadSelect.au3" then
 	SetFuocusWindow()
 	$index = get_squad_list_hight_index()
 	_log4a_Info("get_squad_list_hight_index:"&$index)
+	get_sim_squad_in_list()
 endif
 
-
+func get_sim_squad_in_list()
+	for $i = 1 To UBound($SQUADLIST_POX_Y) - 1
+		local $rect = CreateRectEx($SQUADLIST_POX_X,$SQUADLIST_POX_Y[$i],$SQUADLIST_POX_W,$SQUADLIST_POX_H)
+		local $bfound = CheckPic($g_IMG_STRING_SIM)
+		
+	next
+endfunc
 
 
 func get_squad_list_hight_index()
