@@ -2,8 +2,8 @@
 #include-once
 
 global const $SQUADLIST_POX_X = 173
-global const $SQUADLIST_POX_Y = [187,337,488]
-global const $SQUADLIST_POX_W = 941
+global const $SQUADLIST_POX_Y = [185,334,485]
+global const $SQUADLIST_POX_W = 550
 global const $SQUADLIST_POX_H = 142
 
 
