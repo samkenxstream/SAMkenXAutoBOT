@@ -33,12 +33,13 @@ global const $CONFIRM_BTN_OK_X = 666
 global const $MAX_STATE_CHECK_COUNT = 100
 
 ;状态定义
-global const $SCOUTS_STATE_START 			= 1
+global const $SCOUTS_STATE_INIT 			= 1 ; 初始状态，回到主菜单
 global const $SCOUTS_STATE_FOUND_SCOUTS 	= 2 ; 选择球探界面
 global const $SCOUTS_STATE_MOVE_TO_REQUEST 	= 3	; 移动到请求谈判按钮
 global const $SCOUTS_STATE_CONFIRM_REQUEST 	= 4	; 移动到请求谈判按钮
 global const $SCOUTS_STATE_REQUEST_WAITING 	= 5	; 移动到请求谈判按钮
 global const $SCOUTS_STATE_DONE 			= 6 ; 状态结束
+global const $BACK_TO_MAIN					= 7 ; 退回到主菜单
 
 
 
@@ -130,6 +131,10 @@ func scouts_move_to_next_state($state)
 			return $SCOUTS_STATE_REQUEST_WAITING
 		case $SCOUTS_STATE_REQUEST_WAITING 
 			return $SCOUTS_STATE_FOUND_SCOUTS
+		case $SCOUTS_STATE_DONE
+			return $BACK_TO_MAIN
+		case $BACK_TO_MAIN
+			return $SCOUTS_STATE_INIT
 		case Else
 			return $state
 	endswitch
@@ -154,7 +159,7 @@ func scouts_sold_loop()
 
 			if $star > 3 then
 				$g_scouts_loop_state = $SCOUTS_STATE_DONE
-				return false
+				return true
 			endif
 
 			return true
@@ -189,12 +194,18 @@ func scouts_sold_loop()
 			else
 				return true
 			endif
+		case $BACK_TO_MAIN
+			if find_in_mainmenu() then
+				return true
+			endif
+			_KeyPress($g_KEY_ID_CROSS)
+			Sleep(500)
+			return false
 		Case Else
 			return false
 
 	endswitch
-
-
+	
 	return false
 
 endfunc
@@ -208,8 +219,10 @@ func scouts_state_check()
 	endif
 endfunc
 
+
+;使用此函数前，需要手动将球探的等级作为升序排列（默认为降序排列）
 func start_scouts_sold_main_loop()
-	$g_scouts_loop_state = $SCOUTS_STATE_START
+	$g_scouts_loop_state = $SCOUTS_STATE_INIT
 	find_scouts_menu()
 
     ;进入设定球探界面
@@ -217,7 +230,7 @@ func start_scouts_sold_main_loop()
 	$g_scouts_loop_state = $SCOUTS_STATE_FOUND_SCOUTS
 	AdlibRegister("scouts_state_check",500)
 	while (1)
-		if $g_scouts_loop_state == $SCOUTS_STATE_DONE then
+		if $g_scouts_loop_state == $SCOUTS_STATE_INIT then
 			ExitLoop
 		endif
     wend

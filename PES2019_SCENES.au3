@@ -79,8 +79,7 @@ Func GetTopTabIndex()
 	next
 
     _log4a_Info("GetTopTabIndex,find table card failed.")
-    ScreenCapture()
-    exit 0
+    return -1
 EndFunc
 
 Func GetMidTabIndex()
@@ -97,7 +96,7 @@ Func GetMidTabIndex()
     next
 
     _log4a_Info("GetMidTabIndex,find table card failed.")
-    ScreenCapture()
+	return -1
 EndFunc
 
 
@@ -127,4 +126,14 @@ Func CheckInMatchingStage()
     return $bok
 EndFunc
 
+
+Func find_in_mainmenu()
+	local $index_toptab = GetTopTabIndex()
+	local $index_midtab = GetMidTabIndex()
+	if $index_toptab <> -1 and $index_midtab <> -1 then
+		return true
+	endif
+	
+	return false
+EndFunc
 
