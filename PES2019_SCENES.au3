@@ -35,6 +35,8 @@ if @ScriptName == "PES2019_SCENES.au3" then
     GetTopTabIndex()
     ;CheckInMatchingStage()
     CheckPic($g_IMG_TEAM_MANAGER_ITEM)
+    CheckPic($g_IMG_TEAM_MANAGER_MAIN)
+    
 endif
 
 

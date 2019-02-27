@@ -97,15 +97,22 @@ func after_match_checking()
         return
     endif
     
-    _KeyPress($g_KEY_ID_CIRCLE)
-    Sleep(2000)
-    
+    ; 是否在小队管理界面
     $bok = CheckPic($g_IMG_TEAM_MANAGER_ITEM)
-    
     if $bok then 
         on_match_end()
+        return
     endif
     
+    $bok = CheckPic($g_IMG_TEAM_MANAGER_MAIN)
+    if $bok then 
+        _KeyPress($g_KEY_ID_CROSS)
+        Sleep(5000)
+        return
+    endif
+    
+    _KeyPress($g_KEY_ID_CIRCLE)
+    Sleep(3000)
 endfunc
 
 

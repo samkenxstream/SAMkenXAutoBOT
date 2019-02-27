@@ -42,7 +42,7 @@ While(1)
     on_match_main_loop()
     ; wait for match exit
     while not is_match_end()
-        Sleep(1000)
+        Sleep(3000)
     wend
     _log4a_Info("on_match_end()")
     squad_list_on_match_finished()
