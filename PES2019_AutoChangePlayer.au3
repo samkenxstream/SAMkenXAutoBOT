@@ -2,6 +2,10 @@
 #include-once
 
 
+global $PLAYER_CARD_W = 66
+global $PLAYER_CARD_H = 66
+
+
 #include "IncludeCommon.au3"
 
 
