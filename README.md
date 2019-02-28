@@ -32,4 +32,12 @@
 1. page_index
 2. row_index(1 or 2)
 3. if renew contract
+- 目前暂时采用配置文件的方式
+
+### 自动换人算法
+1. 在配置文件中设定每一个位置的区域 GK/CB/LB/RB/DMF/CMF/LMF/RMF/AMF/SS/CF
+2. 找到红色点所在的区域识别出位置
+3. 识别当前位置的颜色, 白球或者铜球
+4. 去球员库找到相应位置的响应球员,选中
+
 
