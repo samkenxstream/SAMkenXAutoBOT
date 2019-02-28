@@ -17,12 +17,11 @@
 #include "PES2019_GameResource.au3"
 #include "HotKeyMgr.au3"
 #include "SmtpMailer.au3"
-#include "PES2019_SCENES.au3"
 #include "PES2019_WatchDog.au3"
-#include "PES2019_ScoutsSold.au3"
 #include "PES2019_SquadSelect.au3"
 #include "PES2019_MatchLoop.au3"
 #include "PES2019_Mainmenu.au3"
+#include "PES2019_ScoutsSold.au3"
 
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)
@@ -34,3 +33,13 @@ _squad_select_startup()
 ;_PS4_HotKey_Init()
 _log4a_SetLogFile($g_log_path)
 start_watch_dog()
+
+Func reset_log_file()
+	$hFO = FileOpen($g_log_path, 2)
+	if @error then
+		return
+	endif
+	FileWrite($hFO, "")
+	FileClose($hFO)
+EndFunc
+

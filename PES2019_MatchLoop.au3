@@ -4,6 +4,10 @@
 
 #include "IncludeCommon.au3"
 
+
+; update log:
+; 
+
 if @ScriptName == "PES2019_MatchLoop.au3" then
     CheckPic($g_IMG_MATCH_END)
     CheckPic($g_IMG_SQUAD_INVALID)
@@ -26,6 +30,7 @@ func on_match_end_loop()
     $path = ScreenCapture()
     send_email("PES2019 SIM Match Report by auto","PES2019 SIM Match End",$g_log_path&";"&$path)
     reset_watch_dog()
+	reset_log_file()
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(2000)
     _KeyPress($g_KEY_ID_CIRCLE)
@@ -124,3 +129,6 @@ endfunc
 func is_match_end()
     return $g_match_end
 endfunc
+
+
+
