@@ -8,6 +8,7 @@ Local const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 
 
 if @ScriptName == "HotKeyMgr.au3" then
+	_PS4_HotKey_Init()
     While True
 		Sleep(500)
     WEnd
@@ -15,12 +16,12 @@ endif
 
 
 Func _PS4_HotKey_Init()
+	_log4a_Info("_PS4_HotKey_Init")
 	DirCreate($Screen_Shot_path)
 	HotKeySet("!p", "onScreenCapture") 	; ctrl+1
-	HotKeySet("^w", "PrintWindowSize") 	; ctrl+2
-	HotKeySet("^e", "SetWindowPos") 	; ctrl+3
-	HotKeySet("^r", "QuitScript") 	    ; ctrl+4
-
+	HotKeySet("!w", "PrintWindowSize") 	; ctrl+2
+	HotKeySet("!e", "SetWindowPos") 	; ctrl+3
+	HotKeySet("!q", "QuitScript") 	    ; ctrl+4
 EndFunc
 
 

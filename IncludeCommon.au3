@@ -43,3 +43,6 @@ Func reset_log_file()
 	FileClose($hFO)
 EndFunc
 
+
+
+

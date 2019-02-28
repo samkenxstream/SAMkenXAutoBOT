@@ -59,5 +59,18 @@ Func _GetUnixTime($sDate = 0);Date Format: 2013/01/01 00:00:00 ~ Year/Mo/Da Hr:M
 EndFunc   ;==>_GetUnixTime
 
 
+; 是否为维护时间, 每周四上午10点开始维护
+Func get_is_maintenance_time()
+	Local $iWeekday = _DateToDayOfWeek(@YEAR, @MON, @MDAY)
+	if $iWeekday <> 4 then
+		return false
+	endif
 
+	; 周四上午9点半以后不允许开比赛了
+	if @HOUR == 9 and @MIN >= 30 then
+		return true
+	endif
+
+	return false
+EndFunc
 
