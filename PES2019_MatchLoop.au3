@@ -90,7 +90,15 @@ func in_match_checking()
 endfunc
 
 func after_match_checking()
-    local static $is_renew_manager = false;
+    local static $is_renew_manager = false
+    local static $is_renew_player = false
+    
+    ; 球员合约更新
+    $bok = CheckPic($g_IMG_PLAYER_CONTRACT_EXPIRED)
+    if $bok then
+        $is_renew_player = true
+    endif
+    
     ; 主教练合约更新
     $bok = CheckPic($g_IMG_RECONTRACT_MANAGER_NOTIFY)
     if $bok then
@@ -106,18 +114,30 @@ func after_match_checking()
         $is_renew_manager = true
         return
     endif
-
-    if $is_renew_manager then
+    
+    ; 跳出支付界面,如果高亮区域在NO,则向右并且点击确认.
+    if $is_renew_manager or $is_renew_player then
         $bok = CheckPic($g_IMG_HIGHLIGHT_NO)
-        _KeyPress($g_KEY_ID_RIGHT)
-        Sleep(1000)
-        _KeyPress($g_KEY_ID_RIGHT)
-        Sleep(1000)
-        _KeyPress($g_KEY_ID_RIGHT)
-        Sleep(1000)
-        _KeyPress($g_KEY_ID_CIRCLE)
-        Sleep(1000)
-        $is_renew_manager = false
+        if $bok then
+            _KeyPress($g_KEY_ID_RIGHT)
+            Sleep(1000)
+            _KeyPress($g_KEY_ID_RIGHT)
+            Sleep(1000)
+            _KeyPress($g_KEY_ID_RIGHT)
+            Sleep(1000)
+            _KeyPress($g_KEY_ID_CIRCLE)
+            Sleep(1000)
+            if $is_renew_manager then 
+                $is_renew_manager = false
+            endif
+            
+            if $is_renew_player then 
+                $is_renew_player = false
+            endif
+            
+            return
+        endif
+        
     endif
 
     ; 是否在小队管理界面

@@ -23,7 +23,7 @@ Global const $g_IMG_SQUAD_LIST_TITLE            = 20
 Global const $g_IMG_SQUAD_INVALID               = 21
 Global const $g_IMG_MAINMENU_FEATURE_ICON       = 22
 Global const $g_IMG_MAINMENU_SET_SCOUT_TITLE    = 23
-
+Global const $g_IMG_PLAYER_CONTRACT_EXPIRED     = 24
 
 Global const $g_IMG_NUM_MAX = 100
 Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
@@ -65,6 +65,8 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_SQUAD_INVALID] = "squad_invalid.png"
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_FEATURE_ICON] = "mainmenu_feature_icon.png"
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SET_SCOUT_TITLE] = "set_scout_title.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SET_SCOUT_TITLE] = "set_scout_title.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_PLAYER_CONTRACT_EXPIRED] = "player_contract_expired.png"
 EndFunc
 
 
@@ -113,9 +115,11 @@ Func CheckPic($img_id,$area = False)
         ;Find match pic
         _log4a_Info("CheckPic,match success for "&$pic_name)
         _log4a_Info("match area is:x1="&$Match[0]&",y1="&$Match[1]&",x2="&$Match[2]&",y2="&$Match[3])
+        _WinAPI_DeleteObject($hBitmap)
         return true
     else
         _log4a_Info("CheckPic,match faied for "&$pic_name)
+        _WinAPI_DeleteObject($hBitmap)
         return false
     EndIf
 EndFunc

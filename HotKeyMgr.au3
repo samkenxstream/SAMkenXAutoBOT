@@ -52,6 +52,7 @@ Func ScreenCapture($pic_suffix = "jpg")
 	Local $_suffix = $pic_suffix
     Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&"."&$_suffix
 	_ScreenCapture_SaveImage($saved_screen_path,$hBitmap)
+    _WinAPI_DeleteObject($hBitmap)
     return $saved_screen_path
 EndFunc
 
