@@ -3,11 +3,11 @@
 
 
 ;主菜单的三个选项卡，比赛/CLUBHOUSE/签约
-global const $MAINMENU_TOPTAB_MATCH 		= 1 ; 比赛菜单
-global const $MAINMENU_TOPTAB_CLUBHOUSE 	= 2 ; club house
-global const $MAINMENU_TOPTAB_SIGN 		    = 3 ; 签约
-global const $MAINMENU_TOPTAB_RECORD 		= 4 ; 记录
-global const $MAINMENU_TOPTAB_OPTION 		= 5 ; 选项
+global const $MAINMENU_TOPTAB_MATCH         = 1 ; 比赛菜单
+global const $MAINMENU_TOPTAB_CLUBHOUSE     = 2 ; club house
+global const $MAINMENU_TOPTAB_SIGN          = 3 ; 签约
+global const $MAINMENU_TOPTAB_RECORD        = 4 ; 记录
+global const $MAINMENU_TOPTAB_OPTION        = 5 ; 选项
 
 ;中间菜单
 global const $MAINMENU_MIDCARD_NONE     = 0
@@ -21,7 +21,8 @@ global const $MAINMENU_TOPCARD_X_ARRAY[5] = [80,315,550,780,1016]
 global const $MAINMENU_TOPCARD_Y = 150
 global const $MAINMENU_TOPCARD_W = 190
 global const $MAINMENU_TOPCARD_H = 40
-global const $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = [0x352059]
+global const $MAINMENU_TOP_CARD_HIGHLIGHT_COLOR = 0x352059
+
 
 ;中间选项卡各个区域坐标
 global const $MAINMENU_MIDCARD_X1 = 130
@@ -39,7 +40,7 @@ global const $MAINMENU_MIDCARD_UNSELECT_COLOR = 0xdcd8d1
 
 if @ScriptName == "PES2019_Mainmenu.au3" then
     SetFuocusWindow()
-	;move_to_squad_menu()
+    ;move_to_squad_menu()
     ;Sleep(5000)
     move_to_sim_match_menu()
     ;back_to_top_menu()
@@ -125,25 +126,30 @@ Func CreateRectEx($x,$y,$w,$h)
     $y2 = $y1 + $h - 1
 
     $rect[0] = $x1
-	$rect[1] = $y1
-	$rect[2] = $x2
-	$rect[3] = $y2
-	;_log4a_Info("CreateRectEx:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
+    $rect[1] = $y1
+    $rect[2] = $x2
+    $rect[3] = $y2
+    ;_log4a_Info("CreateRectEx:x1="&$x1&",y1="&$y1&",x2="&$x2&",y2="&$y2)
     return $rect
 EndFunc
 
 Func GetTopTabIndex()
+    $bFound = CheckPic($g_IMG_MAINMENU_FEATURE_ICON)
+    
+    if not $bFound then 
+        return -1
+    endif
+    
+    
     For $i = 0 To UBound($MAINMENU_TOPCARD_X_ARRAY) - 1
         local $rect = CreateRectEx($MAINMENU_TOPCARD_X_ARRAY[$i],$MAINMENU_TOPCARD_Y,$MAINMENU_TOPCARD_W,$MAINMENU_TOPCARD_H)
-        For $j = 0 to UBound($MAINMENU_TOP_CARD_HIGHLIGHT_COLOR) - 1
-            Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_TOP_CARD_HIGHLIGHT_COLOR[$j],$IMAGE_SEARCH_SV)
-            If not @error then
-                $index = ($i + 1)
-                _log4a_Info("GetTopTabIndex,find index:"&$index)
-                return $index
-            endif
-		next
-	next
+        Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_TOP_CARD_HIGHLIGHT_COLOR,$IMAGE_SEARCH_SV)
+        If not @error then
+            $index = ($i + 1)
+            _log4a_Info("GetTopTabIndex,find index:"&$index)
+            return $index
+        endif
+    next
 
     _log4a_Info("GetTopTabIndex,find table card failed.")
     return -1
@@ -152,6 +158,11 @@ EndFunc
 Func GetMidTabIndex()
     local $x_array[3] = [$MAINMENU_MIDCARD_X1,$MAINMENU_MIDCARD_X2,$MAINMENU_MIDCARD_X3]
 
+    $bFound = CheckPic($g_IMG_MAINMENU_FEATURE_ICON)
+    if not $bFound then 
+        return -1
+    endif
+    
     For $i = 0 To UBound($x_array) - 1
         local $rect = CreateRectEx($x_array[$i],$MAINMENU_MIDCARD_Y,$MAINMENU_MIDCARD_W,$MAINMENU_MIDCARD_H)
         Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$MAINMENU_MIDCARD_UNSELECT_COLOR,$IMAGE_SEARCH_SV)
@@ -163,15 +174,15 @@ Func GetMidTabIndex()
     next
 
     _log4a_Info("GetMidTabIndex,find table card failed.")
-	return -1
+    return -1
 EndFunc
 
 Func find_in_mainmenu()
-	local $index_toptab = GetTopTabIndex()
-	if $index_toptab <> -1 then
-		return true
-	endif
+    local $index_toptab = GetTopTabIndex()
+    if $index_toptab <> -1 then
+        return true
+    endif
 
-	return false
+    return false
 EndFunc
 
