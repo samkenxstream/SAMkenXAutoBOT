@@ -44,13 +44,13 @@ While(1)
     while not is_match_end()
         Sleep(3000)
     wend
-	$is_maintains = get_is_maintenance_time()
-	
+    $is_maintains = get_is_maintenance_time()
+    
     _log4a_Info("on_match_end:is_maintains="&$is_maintains)
     squad_list_on_match_finished()
-	if $is_maintains then
-		ExitLoop
-	endif
+    if $is_maintains then
+        ExitLoop
+    endif
 WEnd
 
 _OpenCV_Shutdown();Closes DLLs
