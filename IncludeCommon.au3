@@ -22,6 +22,9 @@
 #include "PES2019_MatchLoop.au3"
 #include "PES2019_Mainmenu.au3"
 #include "PES2019_ScoutsSold.au3"
+#include "PES2019_AutoChangePlayer.au3"
+
+
 
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)

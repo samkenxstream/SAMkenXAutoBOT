@@ -33,8 +33,7 @@ Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
 
 
 if @ScriptName == "PES2019_GameResource.au3" then
-    _log4a_SetEnable()
-    _GameResource_Startup()
+
 endif
 
 
