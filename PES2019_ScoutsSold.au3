@@ -158,19 +158,13 @@ func scouts_sold_loop()
 			return true
 
 		case $SCOUTS_STATE_MOVE_TO_REQUEST
-            _KeyPress($g_KEY_ID_DOWN)
-            Sleep(1000)
-            _KeyPress($g_KEY_ID_DOWN)
-            Sleep(1000)
-            _KeyPress($g_KEY_ID_DOWN)
-            Sleep(1000)
-
             while not check_scout_request_highted()
+                _KeyPress($g_KEY_ID_DOWN)
                 Sleep(1000)
             wend
-
+            Sleep(2000)
             _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(1000)
+            Sleep(2000)
             return true
 
 		case $SCOUTS_STATE_CONFIRM_REQUEST
@@ -285,6 +279,12 @@ func find_scout_screen()
 endfunc
 
 func check_scout_request_highted()
+    $bfound = CheckPic($g_IMG_MAINMENU_SET_SCOUT_TITLE)
+
+    if not $bfound then
+        return false
+    endif
+    
     local $rect = CreateRectEx($SCOUTS_CONFIRM_X,$SCOUTS_CONFIRM_Y,$SCOUTS_CONFIRM_W,$SCOUTS_CONFIRM_H)
     Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$SCOUTS_CONFIRM_UNHIGHT_COLOR,$IMAGE_SEARCH_SV)
     If @error then
