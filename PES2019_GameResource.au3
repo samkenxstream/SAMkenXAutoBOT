@@ -94,7 +94,9 @@ EndFunc
 
 Func CheckPic($img_id,$area = False)
     Local $hBitmap
-
+    
+    _log4a_Info("CheckPic:"&$img_id)
+    
     $pic_name = $g_GAME_PIC_ARRAY[$img_id]
     $Match_Pic = @ScriptDir&"\pes2019_img_search\"&$pic_name
     $hwnd = GetPS4RemoteWindowHandler()
