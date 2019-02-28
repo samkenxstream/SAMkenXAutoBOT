@@ -62,9 +62,9 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_STRING_WHITE_BALL] = "squad_list_string_whiteball.png"
     $g_GAME_PIC_ARRAY[$g_IMG_STRING_TRAINING] = "squad_list_string_training.png"
     $g_GAME_PIC_ARRAY[$g_IMG_SQUAD_LIST_TITLE] = "squad_list_title.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_SQUAD_INVALID] = "squad_invalid.png"
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_FEATURE_ICON] = "mainmenu_feature_icon.png"
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SET_SCOUT_TITLE] = "set_scout_title.png"
-    
 EndFunc
 
 
@@ -95,9 +95,11 @@ EndFunc
 Func CheckPic($img_id,$area = False)
     Local $hBitmap
     
-    _log4a_Info("CheckPic:"&$img_id)
-    
     $pic_name = $g_GAME_PIC_ARRAY[$img_id]
+    if $pic_name == "" then
+        _log4a_Info("CheckPic, the pic name is null,img_id="&$img_id)
+    endif
+    
     $Match_Pic = @ScriptDir&"\pes2019_img_search\"&$pic_name
     $hwnd = GetPS4RemoteWindowHandler()
     If IsArray($area) Then

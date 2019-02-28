@@ -11,12 +11,14 @@
 if @ScriptName == "PES2019_MatchLoop.au3" then
     CheckPic($g_IMG_MATCH_END)
     CheckPic($g_IMG_SQUAD_INVALID)
+	CheckPic($g_IMG_GAME_REPLAY)
 endif
 
 
 global $g_match_end = false
 
 func on_match_main_loop()
+    _log4a_Info("on_match_main_loop")
     $g_match_end = false
     Sleep(5000)
     _KeyPress($g_KEY_ID_CIRCLE)
