@@ -113,6 +113,8 @@ func after_match_checking()
         ; 重复按右键三次,确保选中合约更新
         move_to_yes_button_and_press()
         $is_renew_manager = true
+        $path = ScreenCapture()
+        send_email("PES2019:Start to renew player's contract","Start to renew player's contract",$g_log_path&";"&$path)
         return
     endif
     
@@ -123,6 +125,8 @@ func after_match_checking()
         ; 重复按右键三次,确保选中合约更新
         move_to_yes_button_and_press()
         $is_renew_manager = true
+        $path = ScreenCapture()
+        send_email("PES2019:Start to renew manager's contract","Start to renew manager's contract",$g_log_path&";"&$path)
         return
     endif
     
@@ -139,6 +143,9 @@ func after_match_checking()
             if $is_renew_player then 
                 $is_renew_player = false
             endif
+            
+            $path = ScreenCapture()
+            send_email("PES2019:renew player or manager's contract success","renew player or manager's contract success",$g_log_path&";"&$path)
             return
         endif
         
