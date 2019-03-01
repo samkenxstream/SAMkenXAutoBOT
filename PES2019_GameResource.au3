@@ -109,7 +109,12 @@ Func CheckPic($img_id,$area = False)
     else
         $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)
     endif
-
+    
+    if @error then
+        _log4a_Info("find error when get screen capture.")
+        return false
+    endif
+    
     $Match = _MatchPicture($Match_Pic,$hBitmap, $g_PicMatch_Threshold)
     If Not @error Then
         ;Find match pic
