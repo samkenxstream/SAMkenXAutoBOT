@@ -154,6 +154,8 @@ func after_match_checking()
         return
     endif
 
+    
+    
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(3000)
 endfunc

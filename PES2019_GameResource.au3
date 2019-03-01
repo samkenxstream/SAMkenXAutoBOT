@@ -33,7 +33,7 @@ Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
 
 
 if @ScriptName == "PES2019_GameResource.au3" then
-
+    CheckPic($g_IMG_TEAM_MANAGER_MAIN)
 endif
 
 
