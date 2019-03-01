@@ -29,6 +29,7 @@
 _log4a_SetEnable()
 _log4a_SetOutput($LOG4A_OUTPUT_BOTH)
 DllCall("User32.dll","bool","SetProcessDPIAware")
+DirCreate($Screen_Shot_path)
 _OpenCV_Startup();loads opencv DLLs
 _GameResource_Startup()
 _KeyMap_Startup()

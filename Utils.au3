@@ -2,6 +2,16 @@
 #include-once
 #include "IncludeCommon.au3"
 
+if @ScriptName == "Utils.au3" then
+	while (1)
+        ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
+        ;_ScreenCapture_Capture($saved_screen_path)
+        $saved_screen_path = ScreenCapture()
+        _log4a_Info("do ScreenCapture to:"&$saved_screen_path)
+		Sleep(5000)
+	WEnd
+endif
+
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
     Local $sSmtpServer = "smtp.ym.163.com" ; address for the smtp-server to use - REQUIRED
 	Local $iIPPort = 994 ; port used for sending the mail

@@ -2,7 +2,6 @@
 #include-once
 
 
-Local const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 
 #include "IncludeCommon.au3"
 
@@ -17,7 +16,7 @@ endif
 
 Func _PS4_HotKey_Init()
 	_log4a_Info("_PS4_HotKey_Init")
-	DirCreate($Screen_Shot_path)
+	
 	HotKeySet("!p", "onScreenCapture") 	; ctrl+1
 	HotKeySet("!w", "PrintWindowSize") 	; ctrl+2
 	HotKeySet("!e", "SetWindowPos") 	; ctrl+3

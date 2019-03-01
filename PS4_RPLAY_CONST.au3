@@ -48,4 +48,5 @@ global const $GAME_STAGE_MAINMENU = 1
 global const $GAME_STAGE_MATCHING = 2
 global const $GAME_STAGE_AFTER_MATCH = 3
 global const $IMAGE_SEARCH_SV = 5
+global const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 
