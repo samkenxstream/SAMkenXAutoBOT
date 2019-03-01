@@ -104,6 +104,10 @@ Func CheckPic($img_id,$area = False)
     
     $Match_Pic = @ScriptDir&"\pes2019_img_search\"&$pic_name
     $hwnd = GetPS4RemoteWindowHandler()
+    if $hwnd == 0 then
+        return false
+    endif
+    
     If IsArray($area) Then
         $hBitmap = _ScreenCapture_Capture("", $area[0],$area[1],$area[2],$area[3])
     else
