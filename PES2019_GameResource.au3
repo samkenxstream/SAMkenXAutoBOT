@@ -24,6 +24,8 @@ Global const $g_IMG_SQUAD_INVALID               = 21
 Global const $g_IMG_MAINMENU_FEATURE_ICON       = 22
 Global const $g_IMG_MAINMENU_SET_SCOUT_TITLE    = 23
 Global const $g_IMG_PLAYER_CONTRACT_EXPIRED     = 24
+Global const $g_IMG_MAINMENU_SIM_ICON           = 25
+
 
 Global const $g_IMG_NUM_MAX = 100
 Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
@@ -67,6 +69,7 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SET_SCOUT_TITLE] = "set_scout_title.png"
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SET_SCOUT_TITLE] = "set_scout_title.png"
     $g_GAME_PIC_ARRAY[$g_IMG_PLAYER_CONTRACT_EXPIRED] = "player_contract_expired.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SIM_ICON] = "mainmenu_sim_icon.png"
 EndFunc
 
 

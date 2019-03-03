@@ -63,12 +63,24 @@ func move_to_sim_match_menu()
         move_top_tab($MAINMENU_TOPTAB_MATCH)
         Sleep(1000)
     wend
-    _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(2000)
-    _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(2000)
-    _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(2000)
+    
+    while (1)
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(2000)
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(2000)
+        _KeyPress($g_KEY_ID_RIGHT)
+        Sleep(2000)
+        $bok = CheckPic($g_IMG_MAINMENU_SIM_ICON)
+        if $bok then
+            exitLoop
+        else
+            move_top_tab($MAINMENU_TOPTAB_MATCH)
+            Sleep(1000)
+        endif
+    wend
+    
+
     _log4a_Info("move_to_sim_match_menu success")
 endfunc
 
