@@ -64,11 +64,11 @@ func move_to_sim_match_menu()
         Sleep(1000)
     wend
     _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(1000)
+    Sleep(2000)
     _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(1000)
+    Sleep(2000)
     _KeyPress($g_KEY_ID_RIGHT)
-    Sleep(1000)
+    Sleep(2000)
     _log4a_Info("move_to_sim_match_menu success")
 endfunc
 
