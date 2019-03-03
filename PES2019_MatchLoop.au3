@@ -131,26 +131,13 @@ func after_match_checking()
         return
     endif
     
-    ; 跳出支付界面,如果高亮区域在NO,则向右并且点击确认.
-    if $is_renew_manager or $is_renew_player then
-        $bok = CheckPic($g_IMG_HIGHLIGHT_NO)
-        _log4a_Info("find highlight no button,should move to yes.")
-        if $bok then
-            move_to_yes_button_and_press()
-            if $is_renew_manager then 
-                $is_renew_manager = false
-            endif
-            
-            if $is_renew_player then 
-                $is_renew_player = false
-            endif
-            
-            $path = ScreenCapture()
-            send_email("PES2019:renew player or manager's contract success","renew player or manager's contract success",$g_log_path&";"&$path)
-            return
-        endif
-        
+    $bok = CheckPic($g_IMG_HIGHLIGHT_NO)
+    _log4a_Info("find highlight no button,should move to yes.")
+    if $bok then
+        move_to_yes_button_and_press()
+        return
     endif
+    
 
     ; 是否在小队管理界面
     for $i = 0 to 3
@@ -173,7 +160,7 @@ func after_match_checking()
     endif
 
     _KeyPress($g_KEY_ID_CIRCLE)
-    Sleep(3000)
+    Sleep(10000)
 endfunc
 
 
