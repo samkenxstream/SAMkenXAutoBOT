@@ -75,7 +75,7 @@ Func _KeyPress($key_id)
     SetFuocusWindow()
 	$hwnd = GetPS4RemoteWindowHandler()
     if $hwnd == 0 then
-        return
+        ;return
     endif
     
     Send($key_name)
