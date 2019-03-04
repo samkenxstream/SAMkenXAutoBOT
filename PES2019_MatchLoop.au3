@@ -110,9 +110,6 @@ func after_match_checking()
     if $bok then
         $is_renew_player = true
         _log4a_Info("start renew player contract")
-        $path = ScreenCapture()
-        send_email("PES2019:Start to renew player's contract","Start to renew player's contract",$g_log_path&";"&$path)
-
         ; 重复按右键三次,确保选中合约更新
         move_to_yes_button_and_press()
         $is_renew_manager = true
@@ -125,7 +122,7 @@ func after_match_checking()
         $is_renew_manager = true
         _log4a_Info("start renew manager contract")
         $path = ScreenCapture()
-        send_email("PES2019:Start to renew manager's contract","Start to renew manager's contract",$g_log_path&";"&$path)
+        send_email("PES2019:RENEW MANAGER's contract","start to renew manager's contract",$g_log_path&";"&$path)
         ; 重复按右键三次,确保选中合约更新
         move_to_yes_button_and_press()
         return

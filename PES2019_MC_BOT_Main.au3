@@ -38,6 +38,7 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
+    send_email("PES2019 SIM MATCH STARTED"& _NowTime(),"PES2019 SIM Match STARTED"& _NowTime()
 
     on_match_main_loop()
     ; wait for match exit
