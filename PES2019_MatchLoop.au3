@@ -32,12 +32,12 @@ func on_match_main_loop()
     $g_match_end = false
     Sleep(5000)
     _KeyPress($g_KEY_ID_CIRCLE)
-    AdlibRegister("in_match_checking",5000)
+    AdlibRegister("in_match_checking",1000)
 endfunc
 
 func on_match_end_loop()
     AdlibUnRegister("in_match_checking")
-    AdlibRegister("after_match_checking",1000)
+    AdlibRegister("after_match_checking",3000)
     SetFuocusWindow()
     $path = ScreenCapture()
     send_email("PES2019 SIM Match END at "& _NowTime(),"PES2019 SIM Match END at "& _NowTime(),$g_log_path&";"&$path)
@@ -52,17 +52,8 @@ func on_match_end_loop()
 endfunc
 
 func in_match_checking()
+    local $is_match_started = false
     
-    ; 如果在比赛缩略图界面,直接返回.
-    local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
-    $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
-    if $bok then
-        Sleep(1000)
-        return
-    else
-        _KeyPress($g_KEY_ID_TRIANGLE)
-        Sleep(1000)
-    endif
 
     ; 跳过动画
     $bok = CheckPic($g_IMG_GAME_REPLAY)
@@ -103,9 +94,31 @@ func in_match_checking()
         on_match_end_loop()
         return
     endif
-
-    _KeyPress($g_KEY_ID_CIRCLE)
-    Sleep(1000)
+    
+    ; 下半场
+    $bok = CheckPic($g_IMG_HALF_TIME)
+    if $bok then
+        _KeyPress($g_KEY_ID_CIRCLE)
+        Sleep(1000)
+        return
+    endif
+    
+    ; 如果在比赛缩略图界面,直接返回.
+    local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
+    $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
+    if $bok then
+        $is_match_started = true
+        Sleep(1000)
+        return
+    else
+        _KeyPress($g_KEY_ID_TRIANGLE)
+        Sleep(1000)
+    endif
+    
+    if not $is_match_started then
+        _KeyPress($g_KEY_ID_CIRCLE)
+        Sleep(1000)
+    endif
 
 endfunc
 
