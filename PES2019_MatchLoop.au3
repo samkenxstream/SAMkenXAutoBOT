@@ -10,7 +10,7 @@ global $INGAME_CHECKPIC_H = 23
 
 #include "IncludeCommon.au3"
 
-
+    
 
 
 ; update log:
@@ -26,10 +26,14 @@ endif
 
 
 global $g_match_end = false
+global $g_match_started = false
+
+
 
 func on_match_main_loop()
     _log4a_Info("on_match_main_loop")
     $g_match_end = false
+    $g_match_started = false
     Sleep(5000)
     _KeyPress($g_KEY_ID_CIRCLE)
     AdlibRegister("in_match_checking",1000)
@@ -52,7 +56,6 @@ func on_match_end_loop()
 endfunc
 
 func in_match_checking()
-    local $is_match_started = false
     
 
     ; 跳过动画
@@ -107,7 +110,7 @@ func in_match_checking()
     local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
     $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
     if $bok then
-        $is_match_started = true
+        $g_match_started = true
         Sleep(1000)
         return
     else
@@ -115,7 +118,7 @@ func in_match_checking()
         Sleep(1000)
     endif
     
-    if not $is_match_started then
+    if not $g_match_started then
         _KeyPress($g_KEY_ID_CIRCLE)
         Sleep(1000)
     endif

@@ -79,11 +79,7 @@ func select_sim_squad()
 
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(5000)
-
-    while not find_in_mainmenu()
-        Sleep(5000)
-    wend
-
+    
 endfunc
 
 
