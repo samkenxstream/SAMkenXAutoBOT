@@ -152,6 +152,7 @@ func scouts_sold_loop()
 
 			if $star > 3 then
 				$g_scouts_loop_state = $SCOUTS_STATE_DONE
+                send_email("PES2019 SIM SCOUTS SOLD DONE","PES2019 SIM SCOUTS SOLD DONE, time:"& _NowTime())
 				return true
 			endif
 
@@ -284,7 +285,7 @@ func check_scout_request_highted()
     if not $bfound then
         return false
     endif
-    
+
     local $rect = CreateRectEx($SCOUTS_CONFIRM_X,$SCOUTS_CONFIRM_Y,$SCOUTS_CONFIRM_W,$SCOUTS_CONFIRM_H)
     Local $aCoord = PixelSearch($rect[0],$rect[1],$rect[2],$rect[3],$SCOUTS_CONFIRM_UNHIGHT_COLOR,$IMAGE_SEARCH_SV)
     If @error then
