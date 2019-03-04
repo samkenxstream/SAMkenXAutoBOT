@@ -32,7 +32,7 @@ func on_match_main_loop()
     $g_match_end = false
     Sleep(5000)
     _KeyPress($g_KEY_ID_CIRCLE)
-    AdlibRegister("in_match_checking",2000)
+    AdlibRegister("in_match_checking",5000)
 endfunc
 
 func on_match_end_loop()
