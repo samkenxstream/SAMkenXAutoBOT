@@ -38,7 +38,7 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
-    send_email("PES2019 SIM MATCH STARTED"& _NowTime(),"PES2019 SIM Match STARTED"& _NowTime()
+    send_email("PES2019 SIM MATCH STARTED"& _NowTime(),"PES2019 SIM Match STARTED"& _NowTime())
 
     on_match_main_loop()
     ; wait for match exit
@@ -46,7 +46,7 @@ While(1)
         Sleep(3000)
     wend
     $is_maintains = get_is_maintenance_time()
-    
+
     _log4a_Info("on_match_end:is_maintains="&$is_maintains)
     squad_list_on_match_finished()
     if $is_maintains then
