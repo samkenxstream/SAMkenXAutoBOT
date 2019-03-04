@@ -2,16 +2,26 @@
 #include-once
 
 
+global $INGAME_CHECKPIC_X = 601
+global $INGAME_CHECKPIC_Y = 138
+global $INGAME_CHECKPIC_W = 85
+global $INGAME_CHECKPIC_H = 23
+
+
 #include "IncludeCommon.au3"
+
+
 
 
 ; update log:
 ;
 
 if @ScriptName == "PES2019_MatchLoop.au3" then
+    local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
     CheckPic($g_IMG_MATCH_END)
     CheckPic($g_IMG_SQUAD_INVALID)
 	CheckPic($g_IMG_GAME_REPLAY)
+    CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
 endif
 
 
@@ -42,7 +52,17 @@ func on_match_end_loop()
 endfunc
 
 func in_match_checking()
-
+    
+    ; 如果在比赛缩略图界面,直接返回.
+    local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
+    $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
+    if $bok then
+        Sleep(1000)
+        return
+    else
+        _KeyPress($g_KEY_ID_TRIANGLE)
+        Sleep(1000)
+    endif
 
     ; 跳过动画
     $bok = CheckPic($g_IMG_GAME_REPLAY)
@@ -99,12 +119,12 @@ func move_to_yes_button_and_press()
     Sleep(1000)
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(1000)
-endfunc 
+endfunc
 
 func after_match_checking()
     local static $is_renew_manager = false
     local static $is_renew_player = false
-    
+
     ; 球员合约更新
     $bok = CheckPic($g_IMG_PLAYER_CONTRACT_EXPIRED)
     if $bok then
@@ -115,7 +135,7 @@ func after_match_checking()
         $is_renew_manager = true
         return
     endif
-    
+
     ; 主教练合约更新
     $bok = CheckPic($g_IMG_RECONTRACT_MANAGER_NOTIFY)
     if $bok then
@@ -127,14 +147,14 @@ func after_match_checking()
         move_to_yes_button_and_press()
         return
     endif
-    
+
     $bok = CheckPic($g_IMG_HIGHLIGHT_NO)
     _log4a_Info("find highlight no button,should move to yes.")
     if $bok then
         move_to_yes_button_and_press()
         return
     endif
-    
+
 
     ; 是否在小队管理界面
     for $i = 0 to 3
@@ -146,8 +166,8 @@ func after_match_checking()
         endif
         Sleep(1000)
     next
-    
-    
+
+
     $bok = CheckPic($g_IMG_TEAM_MANAGER_MAIN)
     if $bok then
         _log4a_Info("find in squad editor window, back to main menu")
