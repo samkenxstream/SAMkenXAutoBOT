@@ -165,8 +165,8 @@ func after_match_checking()
     endif
 
     $bok = CheckPic($g_IMG_HIGHLIGHT_NO)
-    _log4a_Info("find highlight no button,should move to yes.")
     if $bok then
+        _log4a_Info("find highlight no button,should move to yes.")
         move_to_yes_button_and_press()
         return
     endif
