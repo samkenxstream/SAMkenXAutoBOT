@@ -80,6 +80,21 @@ func select_sim_squad()
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(5000)
     
+    
+    
+    ; 确保菜单已经被选中.
+    while (1)
+        $bfound = find_squad_list_title()
+        if $bfound then
+            _KeyPress($g_KEY_ID_CIRCLE)
+            Sleep(5000)
+            continueloop
+        else
+            exitloop
+        endif
+    wend
+    
+    
 endfunc
 
 
