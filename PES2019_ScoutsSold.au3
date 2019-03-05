@@ -51,14 +51,14 @@ global $g_scouts_loop_state
 
 if @ScriptName == "PES2019_ScoutsSold.au3" then
     SetFuocusWindow()
-	;start_scouts_sold_main_loop()
+	start_scouts_sold_main_loop()
     ;GetTopTabIndex()
     ;GetMidTabIndex()
     ;find_scout_star()
     ;check_scout_request_highted()
     ;check_confirm_button()
     ;find_scout_screen()
-    check_scout_request_highted()
+    ;check_scout_request_highted()
 endif
 
 
@@ -174,16 +174,18 @@ func scouts_sold_loop()
 			Sleep(1000)
             _KeyPress($g_KEY_ID_RIGHT)
 			Sleep(1000)
+            _KeyPress($g_KEY_ID_RIGHT)
+			Sleep(1000)
             _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(500)
+            Sleep(2000)
             return true
 
 		case $SCOUTS_STATE_REQUEST_WAITING
 			if not find_scout_screen() then
-				_KeyPress($g_KEY_ID_OPTION)
-				Sleep(500)
 				_KeyPress($g_KEY_ID_CIRCLE)
-				Sleep(500)
+				Sleep(1000)
+				_KeyPress($g_KEY_ID_OPTION)
+				Sleep(1000)
 				return false
 			else
 				return true
