@@ -3,12 +3,14 @@
 #include "IncludeCommon.au3"
 
 if @ScriptName == "Utils.au3" then
+    send_email("Test test","Test test")
 	while (1)
         ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
         ;_ScreenCapture_Capture($saved_screen_path)
         $saved_screen_path = ScreenCapture("bmp")
         _log4a_Info("do ScreenCapture to:"&$saved_screen_path)
 		Sleep(1000)
+        send_email("Test test","Test test")
 	WEnd
 endif
 
