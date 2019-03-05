@@ -18,7 +18,7 @@ global const $SCOUTS_CONFIRM_X = 74
 global const $SCOUTS_CONFIRM_Y = 487
 global const $SCOUTS_CONFIRM_W = 200
 global const $SCOUTS_CONFIRM_H = 57
-global const $SCOUTS_CONFIRM_UNHIGHT_COLOR = 0xf1f0eb
+global const $SCOUTS_CONFIRM_UNHIGHT_COLOR = 0xF2F0EC
 
 
 ;确认菜单高亮区域
@@ -51,13 +51,14 @@ global $g_scouts_loop_state
 
 if @ScriptName == "PES2019_ScoutsSold.au3" then
     SetFuocusWindow()
-	start_scouts_sold_main_loop()
+	;start_scouts_sold_main_loop()
     ;GetTopTabIndex()
     ;GetMidTabIndex()
     ;find_scout_star()
     ;check_scout_request_highted()
     ;check_confirm_button()
     ;find_scout_screen()
+    check_scout_request_highted()
 endif
 
 
