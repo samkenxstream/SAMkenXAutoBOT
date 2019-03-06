@@ -41,6 +41,7 @@ global const $SCOUTS_STATE_REQUEST_WAITING 	= 5	; 或者球员等待动画
 global const $SCOUTS_STATE_DONE 			= 6 ; 状态结束
 global const $BACK_TO_MAIN					= 7 ; 退回到主菜单
 
+global const $SCOUTS_START_KEEP				= 5 ; 需要保留的球探星级
 
 
 #include "IncludeCommon.au3"
@@ -151,7 +152,7 @@ func scouts_sold_loop()
 				return false
 			endif
 
-			if $star > 3 then
+			if $star >= $SCOUTS_START_KEEP then
 				$g_scouts_loop_state = $SCOUTS_STATE_DONE
                 send_email("PES2019 SIM SCOUTS SOLD DONE","PES2019 SIM SCOUTS SOLD DONE, time:"& _NowTime())
 				return true
