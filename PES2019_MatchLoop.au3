@@ -22,6 +22,7 @@ if @ScriptName == "PES2019_MatchLoop.au3" then
     CheckPic($g_IMG_SQUAD_INVALID)
 	CheckPic($g_IMG_GAME_REPLAY)
     CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
+    CheckPic($g_IMG_BUTTON_OK)
 endif
 
 
@@ -41,7 +42,7 @@ endfunc
 
 func on_match_end_loop()
     AdlibUnRegister("in_match_checking")
-    AdlibRegister("after_match_checking",3000)
+    AdlibRegister("after_match_checking",1000)
     SetFuocusWindow()
     $path = ScreenCapture()
     send_email("PES2019 SIM Match END at "& _NowTime(),"PES2019 SIM Match END at "& _NowTime(),$g_log_path&";"&$path)
@@ -138,8 +139,6 @@ func move_to_yes_button_and_press()
 endfunc
 
 func after_match_checking()
-    local static $is_renew_manager = false
-    local static $is_renew_player = false
 
     ; 球员合约更新
     $bok = CheckPic($g_IMG_PLAYER_CONTRACT_EXPIRED)
@@ -148,14 +147,12 @@ func after_match_checking()
         _log4a_Info("start renew player contract")
         ; 重复按右键三次,确保选中合约更新
         move_to_yes_button_and_press()
-        $is_renew_manager = true
         return
     endif
 
     ; 主教练合约更新
     $bok = CheckPic($g_IMG_RECONTRACT_MANAGER_NOTIFY)
     if $bok then
-        $is_renew_manager = true
         _log4a_Info("start renew manager contract")
         $path = ScreenCapture()
         send_email("PES2019:RENEW MANAGER's contract","start to renew manager's contract",$g_log_path&";"&$path)
@@ -170,7 +167,22 @@ func after_match_checking()
         move_to_yes_button_and_press()
         return
     endif
-
+    
+    $bok = CheckPic($g_IMG_TEAM_MANAGER_MAIN)
+    if $bok then
+        _log4a_Info("find in squad editor window, back to main menu")
+        _KeyPress($g_KEY_ID_CROSS)
+        Sleep(5000)
+        return
+    endif
+    
+    $bok = CheckPic($g_IMG_BUTTON_OK)
+    if $bok then
+        _KeyPress($g_KEY_ID_CIRCLE)
+        Sleep(1000)
+        return
+    endif
+    
 
     ; 是否在小队管理界面
     for $i = 0 to 3
@@ -182,15 +194,6 @@ func after_match_checking()
         endif
         Sleep(1000)
     next
-
-
-    $bok = CheckPic($g_IMG_TEAM_MANAGER_MAIN)
-    if $bok then
-        _log4a_Info("find in squad editor window, back to main menu")
-        _KeyPress($g_KEY_ID_CROSS)
-        Sleep(5000)
-        return
-    endif
 
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(10000)
