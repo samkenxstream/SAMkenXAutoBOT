@@ -9,8 +9,8 @@ if @ScriptName == "Utils.au3" then
         ;_ScreenCapture_Capture($saved_screen_path)
         $saved_screen_path = ScreenCapture("bmp")
         _log4a_Info("do ScreenCapture to:"&$saved_screen_path)
-		Sleep(1000)
-        send_email("Test test","Test test")
+		Sleep(200)
+        ;send_email("Test test","Test test")
 	WEnd
 endif
 
