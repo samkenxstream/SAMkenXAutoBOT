@@ -27,7 +27,7 @@ Global const $g_IMG_PLAYER_CONTRACT_EXPIRED     = 24
 Global const $g_IMG_MAINMENU_SIM_ICON           = 25
 Global const $g_IMG_SHORT_GAME_SCREEN           = 26
 Global const $g_IMG_BUTTON_OK                   = 27
-
+Global const $g_IMG_LOADING_ICON                = 28
 
 Global const $g_IMG_NUM_MAX = 100
 Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
@@ -74,6 +74,7 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_MAINMENU_SIM_ICON] = "mainmenu_sim_icon.png"
     $g_GAME_PIC_ARRAY[$g_IMG_SHORT_GAME_SCREEN] = "short_game_screen.png"
     $g_GAME_PIC_ARRAY[$g_IMG_BUTTON_OK] = "button_ok.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_LOADING_ICON] = "loading_icon.png"
 EndFunc
 
 
@@ -140,5 +141,13 @@ Func CheckPic($img_id,$area = False)
     EndIf
 EndFunc
 
-
+Func is_loading_screen()
+    local $rect = CreateRectEx($g_LOADING_ICON_X,$g_LOADING_ICON_Y,$g_LOADING_ICON_W,$g_LOADING_ICON_H)
+    $bok = CheckPic($g_IMG_LOADING_ICON,$rect)
+    if $bok then
+        return true
+    else
+        return false
+    endif
+EndFunc
 

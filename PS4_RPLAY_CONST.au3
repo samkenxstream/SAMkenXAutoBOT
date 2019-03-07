@@ -50,3 +50,12 @@ global const $GAME_STAGE_AFTER_MATCH = 3
 global const $IMAGE_SEARCH_SV = 5
 global const $Screen_Shot_path = @MyDocumentsDir & "\pes2019\screenshot\"
 
+
+Global $g_LOADING_ICON_X = 140
+Global $g_LOADING_ICON_Y = 663
+Global $g_LOADING_ICON_W = 36
+Global $g_LOADING_ICON_H = 36
+
+
+
+
