@@ -10,20 +10,23 @@ global $INGAME_CHECKPIC_H = 23
 
 #include "IncludeCommon.au3"
 
-    
+
 
 
 ; update log:
 ;
 
 if @ScriptName == "PES2019_MatchLoop.au3" then
-    local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
-    CheckPic($g_IMG_MATCH_END)
-    CheckPic($g_IMG_SQUAD_INVALID)
-	CheckPic($g_IMG_GAME_REPLAY)
-    CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
-    CheckPic($g_IMG_BUTTON_OK)
-    is_loading_screen()
+	while (1)
+		;local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
+		;CheckPic($g_IMG_MATCH_END)
+		;CheckPic($g_IMG_SQUAD_INVALID)
+		;CheckPic($g_IMG_GAME_REPLAY)
+		;CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
+		;CheckPic($g_IMG_BUTTON_OK)
+		is_loading_screen()
+		Sleep(200)
+	wend
 endif
 
 
@@ -58,7 +61,7 @@ func on_match_end_loop()
 endfunc
 
 func in_match_checking()
-    
+
 
     ; 跳过动画
     $bok = CheckPic($g_IMG_GAME_REPLAY)
@@ -99,7 +102,7 @@ func in_match_checking()
         on_match_end_loop()
         return
     endif
-    
+
     ; 下半场
     $bok = CheckPic($g_IMG_HALF_TIME)
     if $bok then
@@ -107,7 +110,7 @@ func in_match_checking()
         Sleep(1000)
         return
     endif
-    
+
     ; 如果在比赛缩略图界面,直接返回.
     local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
     $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
@@ -119,7 +122,7 @@ func in_match_checking()
         _KeyPress($g_KEY_ID_TRIANGLE)
         Sleep(1000)
     endif
-    
+
     if not $g_match_started then
         _KeyPress($g_KEY_ID_CIRCLE)
         Sleep(1000)
@@ -168,7 +171,7 @@ func after_match_checking()
         move_to_yes_button_and_press()
         return
     endif
-    
+
     $bok = CheckPic($g_IMG_TEAM_MANAGER_MAIN)
     if $bok then
         _log4a_Info("find in squad editor window, back to main menu")
@@ -176,14 +179,14 @@ func after_match_checking()
         Sleep(5000)
         return
     endif
-    
+
     $bok = CheckPic($g_IMG_BUTTON_OK)
     if $bok then
         _KeyPress($g_KEY_ID_CIRCLE)
         Sleep(1000)
         return
     endif
-    
+
 
     ; 是否在小队管理界面
     for $i = 0 to 3
