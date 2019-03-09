@@ -4,14 +4,14 @@
 
 if @ScriptName == "Utils.au3" then
     send_email("Test test","Test test")
-	while (1)
+	;while (1)
         ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
         ;_ScreenCapture_Capture($saved_screen_path)
-        $saved_screen_path = ScreenCapture("bmp")
-        _log4a_Info("do ScreenCapture to:"&$saved_screen_path)
-		Sleep(200)
+        ;$saved_screen_path = ScreenCapture("bmp")
+        ;_log4a_Info("do ScreenCapture to:"&$saved_screen_path)
+		;Sleep(200)
         ;send_email("Test test","Test test")
-	WEnd
+	;WEnd
 endif
 
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
@@ -19,7 +19,7 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
 	Local $iIPPort = 994 ; port used for sending the mail
     Local $sFromName = "Simon" ; name from who the email was sent
     Local $sFromAddress = "stock@zl-fm.com" ; address from where the mail should come
-    Local $sToAddress = "lashwang@outlook.com" ; destination address of the email - REQUIRED
+    Local $sToAddress = "lashwang@outlook.com;18106576207@163.com" ; destination address of the email - REQUIRED
 	Local $sCcAddress = "171629646@qq.com" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
     Local $sImportance = "Normal" ; Send message priority: "High", "Normal", "Low"
