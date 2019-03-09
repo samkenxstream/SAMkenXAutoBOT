@@ -15,17 +15,17 @@ if @ScriptName == "Utils.au3" then
 endif
 
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
-    Local $sSmtpServer = "smtp.ym.163.com" ; address for the smtp-server to use - REQUIRED
-	Local $iIPPort = 994 ; port used for sending the mail
+    Local $sSmtpServer = "smtp.163.com" ; address for the smtp-server to use - REQUIRED
+	Local $iIPPort = 25 ; port used for sending the mail
     Local $sFromName = "Simon" ; name from who the email was sent
-    Local $sFromAddress = "stock@zl-fm.com" ; address from where the mail should come
+    Local $sFromAddress = "18106576207@163.com" ; address from where the mail should come
     Local $sToAddress = "lashwang@outlook.com;18106576207@163.com" ; destination address of the email - REQUIRED
 	Local $sCcAddress = "171629646@qq.com" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
     Local $sImportance = "Normal" ; Send message priority: "High", "Normal", "Low"
-    Local $sUsername = "stock@zl-fm.com" ; username for the account used from where the mail gets sent - REQUIRED
-    Local $sPassword = "992154" ; password for the account used from where the mail gets sent - REQUIRED
-    Local $bSSL = True ; enables/disables secure socket layer sending - set to True if using httpS
+    Local $sUsername = "18106576207@163.com" ; username for the account used from where the mail gets sent - REQUIRED
+    Local $sPassword = "meimei1985" ; password for the account used from where the mail gets sent - REQUIRED
+    Local $bSSL = False ; enables/disables secure socket layer sending - set to True if using httpS
     ; Local $iIPPort = 465  ; GMAIL port used for sending the mail
     ; Local $bSSL = True   ; GMAIL enables/disables secure socket layer sending - set to True if using httpS
 
