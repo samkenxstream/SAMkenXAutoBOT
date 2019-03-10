@@ -3,7 +3,7 @@
 #include "IncludeCommon.au3"
 
 if @ScriptName == "Utils.au3" then
-    send_email("Test test","Test test")
+    send_email("SIM MATCH STARTED","SIM MATCH STARTED")
 	;while (1)
         ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
         ;_ScreenCapture_Capture($saved_screen_path)
@@ -15,16 +15,16 @@ if @ScriptName == "Utils.au3" then
 endif
 
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
-    Local $sSmtpServer = "smtp.163.com" ; address for the smtp-server to use - REQUIRED
+    Local $sSmtpServer = "smtp.ym.163.com" ; address for the smtp-server to use - REQUIRED
 	Local $iIPPort = 25 ; port used for sending the mail
     Local $sFromName = "Simon" ; name from who the email was sent
-    Local $sFromAddress = "18106576207@163.com" ; address from where the mail should come
+    Local $sFromAddress = "stock@zl-fm.com" ; address from where the mail should come
     Local $sToAddress = "lashwang@outlook.com;18106576207@163.com" ; destination address of the email - REQUIRED
 	Local $sCcAddress = "" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
-    Local $sImportance = "Normal" ; Send message priority: "High", "Normal", "Low"
-    Local $sUsername = "18106576207@163.com" ; username for the account used from where the mail gets sent - REQUIRED
-    Local $sPassword = "meimei1985" ; password for the account used from where the mail gets sent - REQUIRED
+    Local $sImportance = "High" ; Send message priority: "High", "Normal", "Low"
+    Local $sUsername = "stock@zl-fm.com" ; username for the account used from where the mail gets sent - REQUIRED
+    Local $sPassword = "992154" ; password for the account used from where the mail gets sent - REQUIRED
     Local $bSSL = False ; enables/disables secure socket layer sending - set to True if using httpS
     ; Local $iIPPort = 465  ; GMAIL port used for sending the mail
     ; Local $bSSL = True   ; GMAIL enables/disables secure socket layer sending - set to True if using httpS
