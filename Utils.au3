@@ -60,7 +60,7 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
 
     Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
     If @error Then
-        _log4a_Info("send email failed."&@extended);
+        _log4a_Info("send email failed for default config:"&@extended);
         $sSmtpServer  = $g_email_settings_backup[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
         $iIPPort      = $g_email_settings_backup[$g_SERVER_PORT_INDEX] ; port used for sending the mail
         $sUsername    = $g_email_settings_backup[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
@@ -68,6 +68,9 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
         $bSSL         = $g_email_settings_backup[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
         $sFromAddress = $sUsername        ; address from where the mail should come
         $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
+        if @error then
+            _log4a_Info("send email failed for backup config:"&@extended);
+        endif 
     EndIf
 
 EndFunc   ;==>_Example
