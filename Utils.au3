@@ -1,5 +1,31 @@
 #AutoIt3Wrapper_UseX64=n ; In order for the x86 DLLs to work
 #include-once
+
+Global const $g_SERVER_NAME_INDEX   = 0
+Global const $g_SERVER_PORT_INDEX   = 1
+Global const $g_ADDRESS_INDEX       = 2
+Global const $g_PASSWORD_INDEX      = 3
+Global const $g_IF_SSL_INDEX        = 4
+
+Global $g_email_settings_default[10]
+Global $g_email_settings_backup[10]
+
+$g_email_settings_default[$g_SERVER_NAME_INDEX] = "smtp.ym.163.com"
+$g_email_settings_default[$g_SERVER_PORT_INDEX] = 25
+$g_email_settings_default[$g_ADDRESS_INDEX] = "stock@zl-fm.com"
+$g_email_settings_default[$g_PASSWORD_INDEX] = "992154"
+$g_email_settings_default[$g_IF_SSL_INDEX] = False
+
+
+
+$g_email_settings_backup[$g_SERVER_NAME_INDEX] = "smtp.163.com"
+$g_email_settings_backup[$g_SERVER_PORT_INDEX] = 25
+$g_email_settings_backup[$g_ADDRESS_INDEX] = "18106576207@163.com"
+$g_email_settings_backup[$g_PASSWORD_INDEX] = "meimei1985"
+$g_email_settings_backup[$g_IF_SSL_INDEX] = False
+
+
+
 #include "IncludeCommon.au3"
 
 if @ScriptName == "Utils.au3" then
@@ -15,25 +41,33 @@ if @ScriptName == "Utils.au3" then
 endif
 
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
-    Local $sSmtpServer = "smtp.ym.163.com" ; address for the smtp-server to use - REQUIRED
-	Local $iIPPort = 25 ; port used for sending the mail
     Local $sFromName = "Simon" ; name from who the email was sent
-    Local $sFromAddress = "stock@zl-fm.com" ; address from where the mail should come
     Local $sToAddress = "lashwang@outlook.com;18106576207@163.com" ; destination address of the email - REQUIRED
 	Local $sCcAddress = "" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
     Local $sImportance = "High" ; Send message priority: "High", "Normal", "Low"
-    Local $sUsername = "stock@zl-fm.com" ; username for the account used from where the mail gets sent - REQUIRED
-    Local $sPassword = "992154" ; password for the account used from where the mail gets sent - REQUIRED
-    Local $bSSL = False ; enables/disables secure socket layer sending - set to True if using httpS
+
+    Local $sSmtpServer  = $g_email_settings_default[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
+	Local $iIPPort      = $g_email_settings_default[$g_SERVER_PORT_INDEX] ; port used for sending the mail
+    Local $sUsername    = $g_email_settings_default[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
+    Local $sPassword    = $g_email_settings_default[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
+    Local $bSSL         = $g_email_settings_default[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
+    Local $sFromAddress = $sUsername        ; address from where the mail should come
+
     ; Local $iIPPort = 465  ; GMAIL port used for sending the mail
     ; Local $bSSL = True   ; GMAIL enables/disables secure socket layer sending - set to True if using httpS
-
     Local $bIsHTMLBody = False
 
     Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
     If @error Then
         _log4a_Info("send email failed."&@extended);
+        $sSmtpServer  = $g_email_settings_backup[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
+        $iIPPort      = $g_email_settings_backup[$g_SERVER_PORT_INDEX] ; port used for sending the mail
+        $sUsername    = $g_email_settings_backup[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
+        $sPassword    = $g_email_settings_backup[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
+        $bSSL         = $g_email_settings_backup[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
+        $sFromAddress = $sUsername        ; address from where the mail should come
+        $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
     EndIf
 
 EndFunc   ;==>_Example
