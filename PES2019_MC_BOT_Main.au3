@@ -5,7 +5,7 @@
 
 #include "IncludeCommon.au3"
 
-start_tcp_server()
+;start_tcp_server()
 
 ;_PS4_GameWindow_StartUp()
 _log4a_Info("Start to play games")
