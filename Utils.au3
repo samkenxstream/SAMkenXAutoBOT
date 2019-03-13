@@ -9,6 +9,8 @@ Global const $g_IF_SSL_INDEX        = 4
 
 Global $g_email_settings_default[10]
 Global $g_email_settings_backup[10]
+Global $g_email_settings_backup2[10]
+
 
 $g_email_settings_default[$g_SERVER_NAME_INDEX] = "smtp.ym.163.com"
 $g_email_settings_default[$g_SERVER_PORT_INDEX] = 25
@@ -24,6 +26,15 @@ $g_email_settings_backup[$g_ADDRESS_INDEX] = "18106576207@163.com"
 $g_email_settings_backup[$g_PASSWORD_INDEX] = "meimei1985"
 $g_email_settings_backup[$g_IF_SSL_INDEX] = False
 
+
+$g_email_settings_backup2[$g_SERVER_NAME_INDEX] = "smtp.ym.163.com"
+$g_email_settings_backup2[$g_SERVER_PORT_INDEX] = 25
+$g_email_settings_backup2[$g_ADDRESS_INDEX] = "zheng.wang@zl-fm.com"
+$g_email_settings_backup2[$g_PASSWORD_INDEX] = "992154"
+$g_email_settings_backup2[$g_IF_SSL_INDEX] = False
+
+
+Global $g_email_configs[] = [$g_email_settings_default,$g_email_settings_backup2,$g_email_settings_backup]
 
 
 #include "IncludeCommon.au3"
@@ -46,32 +57,27 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
 	Local $sCcAddress = "" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
     Local $sImportance = "High" ; Send message priority: "High", "Normal", "Low"
-
-    Local $sSmtpServer  = $g_email_settings_default[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
-	Local $iIPPort      = $g_email_settings_default[$g_SERVER_PORT_INDEX] ; port used for sending the mail
-    Local $sUsername    = $g_email_settings_default[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
-    Local $sPassword    = $g_email_settings_default[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
-    Local $bSSL         = $g_email_settings_default[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
-    Local $sFromAddress = $sUsername        ; address from where the mail should come
-
     ; Local $iIPPort = 465  ; GMAIL port used for sending the mail
     ; Local $bSSL = True   ; GMAIL enables/disables secure socket layer sending - set to True if using httpS
     Local $bIsHTMLBody = False
 
-    Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
-    If @error Then
-        _log4a_Info("send email failed for default config:"&@extended);
-        $sSmtpServer  = $g_email_settings_backup[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
-        $iIPPort      = $g_email_settings_backup[$g_SERVER_PORT_INDEX] ; port used for sending the mail
-        $sUsername    = $g_email_settings_backup[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
-        $sPassword    = $g_email_settings_backup[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
-        $bSSL         = $g_email_settings_backup[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
-        $sFromAddress = $sUsername        ; address from where the mail should come
-        $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
-        if @error then
-            _log4a_Info("send email failed for backup config:"&@extended);
-        endif 
-    EndIf
+    for $index = 0 to UBound($g_email_configs) - 1
+        Local $email_config = $g_email_configs[$index]
+        Local $sSmtpServer  = $email_config[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
+        Local $iIPPort      = $email_config[$g_SERVER_PORT_INDEX] ; port used for sending the mail
+        Local $sUsername    = $email_config[$g_ADDRESS_INDEX] ; username for the account used from where the mail gets sent - REQUIRED
+        Local $sPassword    = $email_config[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
+        Local $bSSL         = $email_config[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
+        Local $sFromAddress = $sUsername        ; address from where the mail should come
+        Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
+        If @error Then
+            _log4a_Info("send email failed for default config:"&@extended);
+        else
+            ExitLoop
+        EndIf
+    next 
+    
+    
 
 EndFunc   ;==>_Example
 
