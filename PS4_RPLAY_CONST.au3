@@ -57,7 +57,7 @@ Global const $g_LOADING_ICON_W = 36
 Global const $g_LOADING_ICON_H = 36
 
 
-
+Global const $g_HTTP_SERVER_PORT = 8289
 
 
 
