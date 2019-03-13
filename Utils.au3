@@ -71,7 +71,7 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
         Local $sFromAddress = $sUsername        ; address from where the mail should come
         Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
         If @error Then
-            _log4a_Info("send email failed for default config:"&@extended);
+            _log4a_Info("send email failed for :"&$sUsername);
         else
             ExitLoop
         EndIf
