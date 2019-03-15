@@ -137,3 +137,13 @@ Func get_is_maintenance_time()
 	return false
 EndFunc
 
+; 是否为半夜, 23点到7点
+Func is_midnight()
+    if @HOUR >= 23 or @HOUR <= 7 then
+        return True
+    endif 
+    
+    return false
+
+EndFunc
+

@@ -38,8 +38,10 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
-    send_email("SIM MATCH STARTED at "& _NowTime(),"SIM Match STARTED at "& _NowTime())
-
+    if not is_midnight() then 
+        send_email("SIM MATCH STARTED at "& _NowTime(),"SIM Match STARTED at "& _NowTime())
+    endif
+    
     on_match_main_loop()
     ; wait for match exit
     while not is_match_end()
