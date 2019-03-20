@@ -54,7 +54,7 @@ endif
 
 Func send_email($sSubject,$sBody,$sAttachFiles = "")
     Local $sFromName = "Simon" ; name from who the email was sent
-    Local $sToAddress = "lashwang@outlook.com;18106576207@163.com" ; destination address of the email - REQUIRED
+    Local $sToAddress = "18106576207@163.com" ; destination address of the email - REQUIRED
 	Local $sCcAddress = "" ; address for cc - leave blank if not needed
     Local $sBccAddress = "" ; address for bcc - leave blank if not needed
     Local $sImportance = "High" ; Send message priority: "High", "Normal", "Low"
