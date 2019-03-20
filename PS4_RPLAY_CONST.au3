@@ -17,7 +17,7 @@
 ; Name:	ViewPanel
 ; Advanced (Class):	[NAME:ViewPanel]
 ; ID:	723132
-; Text:	
+; Text:
 ; Position:	0, 0
 ; Size:	878, 597
 ; ControlClick Coords:	78, 26
@@ -40,7 +40,7 @@ Global $g_PS4Macro_EXE_PATH = "C:\Users\lashw\Downloads\PS4Macro_0_5_2\PS4Macro.
 Global $g_PS4Macro_EXE = "PS4Macro.exe"
 Global $g_PS4Macro_Title = "PS4 Macro - v0.5.2 (BETA)"
 Global $g_PicMatch_Threshold = 0.7
-Global $g_GameLoop_WatchDogTime = (40*60) ;seconds
+Global $g_GameLoop_WatchDogTime = (20*60) ;seconds
 Global $g_log_path = @MyDocumentsDir&"\pes2019.log"
 
 
