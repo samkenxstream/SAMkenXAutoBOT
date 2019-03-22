@@ -16,6 +16,7 @@ _log4a_Info("Start to play games")
 ; 3.等待比赛结束回到主菜单
 ; 4.选择下一个SIM小队
 
+AdlibRegister("on_network_check_timeout",30*1000)
 
 While(1)
     SetFuocusWindow()
@@ -58,6 +59,14 @@ WEnd
 
 _OpenCV_Shutdown();Closes DLLs
 
+
+
+Func on_network_check_timeout()
+    local $ok = CheckPic($g_IMG_NETWORK_ERROR)
+    if $ok then
+        _KeyPress($g_KEY_ID_CIRCLE)
+    endif
+EndFunc
 
 
 
