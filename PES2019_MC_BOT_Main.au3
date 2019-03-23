@@ -29,6 +29,11 @@ While(1)
     move_to_sim_match_menu()
     Sleep(1000)
 
+    if not is_midnight() then
+		local $path = ScreenCapture()
+        send_email("SIM MATCH STARTED at "& _NowTime(),"SIM Match STARTED at "& _NowTime(),$g_log_path&";"&$path)
+    endif
+
     ; press start key
     _KeyPress($g_KEY_ID_CIRCLE)
     Sleep(1000)
@@ -39,14 +44,12 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
-    if not is_midnight() then 
-        send_email("SIM MATCH STARTED at "& _NowTime(),"SIM Match STARTED at "& _NowTime())
-    endif
-    
+
+
     on_match_main_loop()
     ; wait for match exit
     while not is_match_end()
-        Sleep(3000)
+        Sleep(10000)
     wend
     $is_maintains = get_is_maintenance_time()
 
@@ -67,7 +70,7 @@ Func on_network_check_timeout()
         $path = ScreenCapture()
         send_email("Network Disconnected","Network Disconnected",$g_log_path&";"&$path)
         _KeyPress($g_KEY_ID_CIRCLE)
-        
+
     endif
 EndFunc
 
