@@ -64,7 +64,10 @@ _OpenCV_Shutdown();Closes DLLs
 Func on_network_check_timeout()
     local $ok = CheckPic($g_IMG_NETWORK_ERROR)
     if $ok then
+        $path = ScreenCapture()
+        send_email("Network Disconnected","Network Disconnected",$g_log_path&";"&$path)
         _KeyPress($g_KEY_ID_CIRCLE)
+        
     endif
 EndFunc
 
