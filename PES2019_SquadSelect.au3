@@ -123,3 +123,8 @@ func set_current_squad_invalid()
 
 endfunc
 
+func get_active_squad_index()
+    return $g_total_squad_array[$g_current_squad_index]
+endfunc
+
+

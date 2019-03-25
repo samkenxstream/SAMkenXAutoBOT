@@ -31,7 +31,9 @@ While(1)
 
     if not is_midnight() then
 		local $path = ScreenCapture()
-        send_email("SIM MATCH STARTED at "& _NowTime(),"SIM Match STARTED at "& _NowTime(),$g_log_path&";"&$path)
+        local $squad_index = get_active_squad_index()
+        local $email_content = StringFormat("SIM MATCH STARTED FOR %d at %s",$squad_index,_NowTime())
+        send_email($email_content,$email_content,$g_log_path&";"&$path)
     endif
 
     ; press start key
