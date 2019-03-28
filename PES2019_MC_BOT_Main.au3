@@ -46,6 +46,11 @@ While(1)
         set_current_squad_invalid()
         continueLoop
     endif
+    ; check if the maintain time notice.
+    $ok = CheckPic($g_IMG_HIGHLIGHT_NO)
+    if $ok then
+        move_to_yes_button_and_press()
+    endif
 
 
     on_match_main_loop()

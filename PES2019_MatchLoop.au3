@@ -24,7 +24,8 @@ if @ScriptName == "PES2019_MatchLoop.au3" then
 		;CheckPic($g_IMG_GAME_REPLAY)
 		;CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
 		;CheckPic($g_IMG_BUTTON_OK)
-		is_loading_screen()
+		;is_loading_screen()
+        CheckPic($g_IMG_HIGHLIGHT_NO)
 		Sleep(200)
 	wend
 endif
