@@ -33,7 +33,7 @@ While(1)
 		local $path = ScreenCapture()
         local $squad_index = get_active_squad_index()
         local $email_content = StringFormat("SIM MATCH STARTED FOR %d at %s",$squad_index,_NowTime())
-        send_email($email_content,$email_content,$g_log_path&";"&$path)
+        ;send_email($email_content,$email_content,$g_log_path&";"&$path)
     endif
 
     ; press start key
