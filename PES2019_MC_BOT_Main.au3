@@ -16,7 +16,7 @@ _log4a_Info("Start to play games")
 ; 3.等待比赛结束回到主菜单
 ; 4.选择下一个SIM小队
 
-AdlibRegister("on_network_check_timeout",30*1000)
+AdlibRegister("on_network_check_timeout",5*60*1000)
 
 While(1)
     SetFuocusWindow()
@@ -30,9 +30,9 @@ While(1)
     Sleep(1000)
 
     if not is_midnight() then
-		local $path = ScreenCapture()
-        local $squad_index = get_active_squad_index()
-        local $email_content = StringFormat("SIM MATCH STARTED FOR %d at %s",$squad_index,_NowTime())
+		;local $path = ScreenCapture()
+        ;local $squad_index = get_active_squad_index()
+        ;local $email_content = StringFormat("SIM MATCH STARTED FOR %d at %s",$squad_index,_NowTime())
         ;send_email($email_content,$email_content,$g_log_path&";"&$path)
     endif
 
