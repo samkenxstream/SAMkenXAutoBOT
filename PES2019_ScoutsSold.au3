@@ -162,7 +162,7 @@ func scouts_sold_loop()
 
 		case $SCOUTS_STATE_MOVE_TO_REQUEST
             while not check_scout_request_highted()
-                _KeyPress($g_KEY_ID_DOWN)
+                _KeyPress($g_KEY_ID_UP)
                 Sleep(1000)
             wend
             Sleep(2000)
@@ -172,13 +172,14 @@ func scouts_sold_loop()
 
 		case $SCOUTS_STATE_CONFIRM_REQUEST
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(1000)
+			Sleep(500)
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(1000)
+			Sleep(500)
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(1000)
+			Sleep(500)
             _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(2000)
+            Sleep(1000)
+			_KeyPress($g_KEY_ID_OPTION)
             return true
 
 		case $SCOUTS_STATE_REQUEST_WAITING
