@@ -146,39 +146,36 @@ func scouts_sold_loop()
 	switch $g_scouts_loop_state
 		case $SCOUTS_STATE_FOUND_SCOUTS
 			$star = find_scout_star()
-			if $star == 0 then
+            if $star == 0 then
 				_KeyPress($g_KEY_ID_CIRCLE)
 				Sleep(1000)
 				return false
-			endif
-
+			endif 
+            
+            
 			if $star >= $SCOUTS_START_KEEP then
 				$g_scouts_loop_state = $SCOUTS_STATE_DONE
                 send_email("PES2019 SIM SCOUTS SOLD DONE","PES2019 SIM SCOUTS SOLD DONE, time:"& _NowTime())
 				return true
 			endif
-
+            reset_watch_dog()
 			return true
 
 		case $SCOUTS_STATE_MOVE_TO_REQUEST
             while not check_scout_request_highted()
                 _KeyPress($g_KEY_ID_UP)
-                Sleep(1000)
+                Sleep(500)
             wend
-            Sleep(2000)
+            Sleep(500)
             _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(2000)
+            Sleep(500)
             return true
 
 		case $SCOUTS_STATE_CONFIRM_REQUEST
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(500)
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(500)
             _KeyPress($g_KEY_ID_RIGHT)
-			Sleep(500)
             _KeyPress($g_KEY_ID_CIRCLE)
-            Sleep(1000)
 			_KeyPress($g_KEY_ID_OPTION)
             return true
 
