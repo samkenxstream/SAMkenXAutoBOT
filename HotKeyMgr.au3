@@ -6,6 +6,8 @@
 #include "IncludeCommon.au3"
 
 
+HotKeySet("{ESC}","QuitScript")
+
 if @ScriptName == "HotKeyMgr.au3" then
 	_PS4_HotKey_Init()
     While True
