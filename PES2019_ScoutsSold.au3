@@ -158,6 +158,13 @@ func scouts_sold_loop()
                 send_email("PES2019 SIM SCOUTS SOLD DONE","PES2019 SIM SCOUTS SOLD DONE, time:"& _NowTime())
 				return true
 			endif
+            
+            if CheckPic($g_IMG_NO_SCOUTS_TEXT) then
+            	$g_scouts_loop_state = $SCOUTS_STATE_DONE
+                send_email("PES2019 SIM SCOUTS SOLD DONE","PES2019 SIM SCOUTS SOLD DONE, time:"& _NowTime())
+				return true
+            endif
+            
             reset_watch_dog()
 			return true
 

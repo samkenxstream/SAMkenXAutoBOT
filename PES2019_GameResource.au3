@@ -29,7 +29,7 @@ Global const $g_IMG_SHORT_GAME_SCREEN           = 26
 Global const $g_IMG_BUTTON_OK                   = 27
 Global const $g_IMG_LOADING_ICON                = 28
 Global const $g_IMG_NETWORK_ERROR               = 29
-
+Global const $g_IMG_NO_SCOUTS_TEXT              = 30
 
 Global const $g_IMG_NUM_MAX = 100
 Global $g_GAME_PIC_ARRAY[$g_IMG_NUM_MAX]
@@ -78,6 +78,7 @@ Func _GameResource_Startup()
     $g_GAME_PIC_ARRAY[$g_IMG_BUTTON_OK] = "button_ok.png"
     $g_GAME_PIC_ARRAY[$g_IMG_LOADING_ICON] = "loading_icon.png"
     $g_GAME_PIC_ARRAY[$g_IMG_NETWORK_ERROR] = "network_error.png"
+    $g_GAME_PIC_ARRAY[$g_IMG_NO_SCOUTS_TEXT] = "no_scout_text.png"
 EndFunc
 
 
