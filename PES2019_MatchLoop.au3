@@ -120,6 +120,7 @@ func in_match_checking()
     local $rect = CreateRectEx($INGAME_CHECKPIC_X,$INGAME_CHECKPIC_Y,$INGAME_CHECKPIC_W,$INGAME_CHECKPIC_H)
     $bok = CheckPic($g_IMG_SHORT_GAME_SCREEN,$rect)
     if $bok then
+        reset_watch_dog()
         $g_match_started = true
         Sleep(1000)
         return
@@ -212,6 +213,7 @@ endfunc
 func on_match_end()
     $g_match_end = true
     AdlibUnRegister("after_match_checking")
+    reset_watch_dog()
 endfunc
 
 func is_match_end()
