@@ -10,6 +10,9 @@ Global const $g_WindowHight = 779
 
 #include "IncludeCommon.au3"
 
+if @ScriptName == "PS4_Rplay_GameWindow.au3" then
+    SetFuocusWindow()
+endif
 
 
 
@@ -116,6 +119,11 @@ EndFunc
 
 
 Func SetFuocusWindow()
+    if not checkViewPannelExist() then
+        _log4a_Info("set focus window, the view pannel not exist")
+        return
+    endif
+    
     WinActivate($g_RPLAY_WIN_TITLE)
     Sleep(200)
     CheckInvalidWindow()
