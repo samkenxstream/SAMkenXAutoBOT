@@ -75,6 +75,17 @@ Func onViewPanelCheck()
 	EndIf
 EndFunc
 
+Func checkViewPannelExist()
+    if not WinExists($g_RPLAY_WIN_TITLE) then
+        return
+    endif
+    $hCtrl = ControlGetHandle($g_RPLAY_WIN_TITLE, "", $g_RPLAY_GAME_CONTROL_CLASS)
+    If $hCtrl Then
+        return true
+    EndIf    
+    return false
+EndFunc
+
 
 Func GameWindowCheck()
     Local static $now = _NowCalc()

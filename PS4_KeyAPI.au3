@@ -77,7 +77,8 @@ Func _KeyPress($key_id)
     ;if $hwnd == 0 then
         ;return
     ;endif
-    
-    Send($key_name)
-    Sleep(1000)
+    if checkViewPannelExist() then
+        Send($key_name)
+        Sleep(1000)
+    endif
 EndFunc
