@@ -38,4 +38,9 @@ func on_watch_dog_timeout()
     if $g_watchdog_timeout_count > $g_watchdog_max_allowed_count then
         exit 0
     endif
+    if not checkViewPannelExist() then
+        exit 0
+    endif
+    
+    
 endfunc
