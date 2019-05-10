@@ -25,7 +25,7 @@ global $g_current_squad_index = -1
 
 if @ScriptName == "PES2019_SquadSelect.au3" then
 
-	; SetFuocusWindow()
+	; SetFocusWindow()
 	; $index = get_squad_list_hight_index()
 	; _log4a_Info("get_squad_list_hight_index:"&$index)
 	; get_sim_squad_in_list()

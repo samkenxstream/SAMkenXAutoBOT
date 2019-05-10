@@ -51,7 +51,7 @@ global $g_scouts_loop_state
 
 
 if @ScriptName == "PES2019_ScoutsSold.au3" then
-    SetFuocusWindow()
+    SetFocusWindow()
 	start_scouts_sold_main_loop()
     ;GetTopTabIndex()
     ;GetMidTabIndex()
