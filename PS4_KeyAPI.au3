@@ -72,7 +72,7 @@ Func _KeyPress($key_id)
     $key_name = $g_KEY_MAP[$key_id]
 	_log4a_Info("KeyPress:"&$key_name)
     ;ControlSend($g_RPLAY_WIN_TITLE,"","",$key_name)
-    SetFuocusWindow()
+    SetFocusWindow()
 	;$hwnd = GetPS4RemoteWindowHandler()
     ;if $hwnd == 0 then
         ;return

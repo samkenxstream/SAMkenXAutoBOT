@@ -11,7 +11,10 @@ Global const $g_WindowHight = 779
 #include "IncludeCommon.au3"
 
 if @ScriptName == "PS4_Rplay_GameWindow.au3" then
-    SetFuocusWindow()
+    while true
+        CheckMousePosition()
+        Sleep(5000)
+    wend
 endif
 
 
@@ -59,7 +62,7 @@ Func _PS4_GameWindow_StartUp()
 
     Sleep(10*1000)
     $g_rplay_started = True
-    SetFuocusWindow()
+    SetFocusWindow()
     $g_hwnd_rplay = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
     WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
     _log4a_Info("PS4 Game Window Start compelete,hwnd="&$g_hwnd_rplay)
@@ -118,7 +121,7 @@ Func PS4MacroWindowStart()
 EndFunc
 
 
-Func SetFuocusWindow()
+Func SetFocusWindow()
     if not checkViewPannelExist() then
         _log4a_Info("set focus window, the view pannel not exist")
         return
@@ -126,9 +129,11 @@ Func SetFuocusWindow()
     
     WinActivate($g_RPLAY_WIN_TITLE)
     Sleep(200)
+    if CheckWinNeedMove() then
+        WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
+    endif
+    CheckMousePosition()
     CheckInvalidWindow()
-    Local $aPos = WinGetPos($g_RPLAY_WIN_TITLE)
-    WinMove($g_RPLAY_WIN_TITLE,"",$g_WindowPosX,$g_WindowPosY,$g_WindowWidth,$g_WindowHight)
 EndFunc
 
 Func GetScreenSnapshot($hwnd = 0)
@@ -144,7 +149,7 @@ EndFunc
 
 Func GetPS4RemoteWindowHandler()
     Local $hwnd
-    SetFuocusWindow()
+    SetFocusWindow()
     $hwnd = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
 
     return $hwnd
@@ -155,5 +160,53 @@ Func GetPS4WindowPos()
     ;_log4a_Info("GetPS4WindowPos,x="&$aPos[0]&",y="&$aPos[1])
     return $aPos
 EndFunc
+
+Func CheckWinNeedMove()
+    Local $aPosWindow = WinGetPos($g_RPLAY_WIN_TITLE)
+    Local $aSizeWindow = WinGetClientSize($g_RPLAY_WIN_TITLE)
+    
+    if $aPosWindow[0] <> $g_WindowPosX then
+        return true
+    endif
+    
+    if $aPosWindow[1] <> $g_WindowPosY then
+        return true
+    endif
+    
+    if $aSizeWindow[0] <> $g_WindowWidth then
+        return true
+    endif
+    
+    if $aSizeWindow[1] <> $g_WindowHight then
+        return true
+    endif
+    
+    return false
+EndFunc
+
+Func CheckMousePosition()
+    Local $aPosMouse = MouseGetPos()
+    Local $aPosWindow = WinGetPos($g_RPLAY_WIN_TITLE)
+    Local $aSizeWindow = WinGetClientSize($g_RPLAY_WIN_TITLE)
+    Local $x1,$y1,$x2,$y2
+    Local $x0,$y0
+    
+    $x0 = $aPosMouse[0]
+    $y0 = $aPosMouse[1]
+    $x1 = $aPosWindow[0]
+    $y1 = $aPosWindow[1]
+    $x2 = $x1 + $aSizeWindow[0]
+    $y2 = $y1 + $aSizeWindow[1]
+    
+    if $x0 >= $x1 and $y0 >= $y1 then
+        if $x0 <= $x2 and $y0 <= $y2 then
+            _log4a_Info("Find mouse in window")
+            MouseMove(0,0)
+        endif
+    endif
+    
+     
+EndFunc
+
 
 

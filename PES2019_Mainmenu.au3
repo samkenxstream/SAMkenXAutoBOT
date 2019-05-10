@@ -39,7 +39,7 @@ global const $MAINMENU_MIDCARD_UNSELECT_COLOR = 0xdcd8d1
 
 
 if @ScriptName == "PES2019_Mainmenu.au3" then
-    SetFuocusWindow()
+    SetFocusWindow()
     ;move_to_squad_menu()
     ;Sleep(5000)
     move_to_sim_match_menu()

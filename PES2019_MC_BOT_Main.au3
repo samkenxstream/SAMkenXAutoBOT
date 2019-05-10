@@ -19,7 +19,7 @@ _log4a_Info("Start to play games")
 AdlibRegister("on_network_check_timeout",5*60*1000)
 
 While(1)
-    SetFuocusWindow()
+    SetFocusWindow()
     Sleep(5000)
     back_to_top_menu()
     move_to_squad_menu()
