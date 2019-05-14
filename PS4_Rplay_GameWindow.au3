@@ -202,9 +202,11 @@ Func CheckMousePosition()
         if $x0 <= $x2 and $y0 <= $y2 then
             _log4a_Info("Find mouse in window")
             MouseMove(0,0)
+            return false
         endif
     endif
     
+    return true
      
 EndFunc
 
