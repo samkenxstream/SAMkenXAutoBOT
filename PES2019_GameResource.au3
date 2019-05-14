@@ -120,9 +120,7 @@ Func CheckPic($img_id,$area = False)
         return false
     endif
     
-    if not CheckMousePosition() then
-        return false
-    endif
+	CheckMousePosition()
     
     If IsArray($area) Then
         $hBitmap = _ScreenCapture_Capture("", $area[0],$area[1],$area[2],$area[3])
