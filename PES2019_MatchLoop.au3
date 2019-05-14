@@ -67,7 +67,9 @@ endfunc
 
 func in_match_checking()
 
-
+	
+	SetFocusWindow()
+	
     ; 跳过动画
     $bok = CheckPic($g_IMG_GAME_REPLAY)
     if $bok then
@@ -150,6 +152,8 @@ endfunc
 
 func after_match_checking()
 
+	SetFocusWindow()
+	
     ; 球员合约更新
     $bok = CheckPic($g_IMG_PLAYER_CONTRACT_EXPIRED)
     if $bok then
@@ -211,6 +215,7 @@ endfunc
 
 
 func on_match_end()
+	SetFocusWindow()
     $g_match_end = true
     AdlibUnRegister("after_match_checking")
     reset_watch_dog()
