@@ -11,10 +11,7 @@ Global const $g_WindowHight = 779
 #include "IncludeCommon.au3"
 
 if @ScriptName == "PS4_Rplay_GameWindow.au3" then
-    while true
-        CheckMousePosition()
-        Sleep(5000)
-    wend
+	CheckGameExitWindow()
 endif
 
 
@@ -135,6 +132,13 @@ Func SetFocusWindow()
     endif
     CheckMousePosition()
     CheckInvalidWindow()
+	
+	if CheckGameExitWindow() then
+		$path = ScreenCapture()
+        send_email("Game window exited","Game window exited",$g_log_path&";"&$path)
+		exit 0
+	endif
+	
 EndFunc
 
 Func GetScreenSnapshot($hwnd = 0)
@@ -203,9 +207,11 @@ Func CheckMousePosition()
         if $x0 <= $x2 and $y0 <= $y2 then
             _log4a_Info("Find mouse in window")
             MouseMove(0,0)
+            return false
         endif
     endif
     
+    return true
      
 EndFunc
 
@@ -219,6 +225,14 @@ Func Quit()
 	exit 0
 EndFunc
 
-
-
+Func CheckGameExitWindow()
+	$hCtrl = ControlGetHandle($g_RPLAY_WIN_TITLE, "", $g_RPLAY_GAME_EXIT_CONTROL_CLASS)
+	
+	If Not $hCtrl Then
+		return false
+	else
+		_log4a_Info("Find game exit window")
+		return true
+	endif
+EndFunc
 
