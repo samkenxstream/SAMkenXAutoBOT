@@ -31,15 +31,14 @@ endfunc
 
 
 func on_watch_dog_timeout()
-    SetFocusWindow()
     $path = ScreenCapture()
     send_email("PES2019 Watch Dog Timeout","Watch Dog Timeout",$g_log_path&";"&$path)
     $g_watchdog_timeout_count = $g_watchdog_timeout_count + 1
     if $g_watchdog_timeout_count > $g_watchdog_max_allowed_count then
-        exit 0
+        Quit()
     endif
     if not checkViewPannelExist() then
-        exit 0
+        Quit()
     endif
     
     

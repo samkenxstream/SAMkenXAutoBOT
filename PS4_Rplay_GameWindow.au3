@@ -124,6 +124,7 @@ EndFunc
 Func SetFocusWindow()
     if not checkViewPannelExist() then
         _log4a_Info("set focus window, the view pannel not exist")
+		Quit()
         return
     endif
     
@@ -207,6 +208,17 @@ Func CheckMousePosition()
     
      
 EndFunc
+
+Func Quit()
+	$path = ScreenCapture()
+    send_email("PES2019 Script quit","PES2019 Script quit",$g_log_path&";"&$path)
+	ProcessClose($g_RPLAY_EXE)
+	sleep(500)
+	ProcessClose($g_PS4Macro_EXE)
+	sleep(500)
+	exit 0
+EndFunc
+
 
 
 
