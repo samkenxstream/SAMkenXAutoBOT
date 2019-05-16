@@ -46,7 +46,7 @@ EndFunc
 
 Func ScreenCapture($pic_suffix = "jpg")
 	_log4a_Info("ScreenCapture")
-    SetFocusWindow()
+    ;SetFocusWindow()
     WinActivate($g_RPLAY_WIN_TITLE)
     $hwnd = WinWaitActive($g_RPLAY_WIN_TITLE,"",120)
 	Local $hBitmap = _ScreenCapture_CaptureWnd("", $hwnd)

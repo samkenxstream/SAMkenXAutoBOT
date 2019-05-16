@@ -216,7 +216,7 @@ Func CheckMousePosition()
 EndFunc
 
 Func Quit()
-	$path = ScreenCapture()
+	;$path = ScreenCapture()
     send_email("PES2019 Script quit","PES2019 Script quit",$g_log_path&";"&$path)
 	ProcessClose($g_RPLAY_EXE)
 	sleep(500)
