@@ -217,7 +217,7 @@ EndFunc
 
 Func Quit()
 	;$path = ScreenCapture()
-    send_email("PES2019 Script quit","PES2019 Script quit",$g_log_path&";"&$path)
+    ;send_email("PES2019 Script quit","PES2019 Script quit",$g_log_path&";"&$path)
 	ProcessClose($g_RPLAY_EXE)
 	sleep(500)
 	ProcessClose($g_PS4Macro_EXE)
