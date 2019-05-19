@@ -40,8 +40,8 @@ Global $g_email_configs[] = [$g_email_settings_default,$g_email_settings_backup2
 #include "IncludeCommon.au3"
 
 if @ScriptName == "Utils.au3" then
-    ;send_email("SIM MATCH STARTED","SIM MATCH STARTED")
-    get_is_maintenance_time()
+    send_email("SIM MATCH STARTED","SIM MATCH STARTED")
+    ;get_is_maintenance_time()
 	;while (1)
         ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
         ;_ScreenCapture_Capture($saved_screen_path)
@@ -62,6 +62,8 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
     ; Local $bSSL = True   ; GMAIL enables/disables secure socket layer sending - set to True if using httpS
     Local $bIsHTMLBody = False
 
+    $sSubject2 = $sSubject & " from " & @ComputerName
+    
     for $index = 0 to UBound($g_email_configs) - 1
         Local $email_config = $g_email_configs[$index]
         Local $sSmtpServer  = $email_config[$g_SERVER_NAME_INDEX] ; address for the smtp-server to use - REQUIRED
@@ -70,7 +72,7 @@ Func send_email($sSubject,$sBody,$sAttachFiles = "")
         Local $sPassword    = $email_config[$g_PASSWORD_INDEX] ; password for the account used from where the mail gets sent - REQUIRED
         Local $bSSL         = $email_config[$g_IF_SSL_INDEX] ; enables/disables secure socket layer sending - set to True if using httpS
         Local $sFromAddress = $sUsername        ; address from where the mail should come
-        Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
+        Local $rc = _SMTP_SendEmail($sSmtpServer,$sUsername, $sPassword, $sFromName, $sFromAddress, $sToAddress, $sSubject2, $sBody, $sAttachFiles, $sCcAddress, $sBccAddress, $sImportance,  $iIPPort, $bSSL, $bIsHTMLBody)
         If @error Then
             _log4a_Info("send email failed for :"&$sUsername);
         else
