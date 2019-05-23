@@ -40,8 +40,8 @@ Global $g_email_configs[] = [$g_email_settings_default,$g_email_settings_backup2
 #include "IncludeCommon.au3"
 
 if @ScriptName == "Utils.au3" then
-    send_email("SIM MATCH STARTED","SIM MATCH STARTED")
-    ;get_is_maintenance_time()
+    ;send_email("SIM MATCH STARTED","SIM MATCH STARTED")
+    get_is_maintenance_time()
 	;while (1)
         ;Local $saved_screen_path = $Screen_Shot_path&"image_"&@MON&"_"&@MDAY&"_"&@HOUR&"_"&@MIN&"_"&@SEC&".jpg"
         ;_ScreenCapture_Capture($saved_screen_path)
@@ -126,16 +126,16 @@ Func get_is_maintenance_time()
 	endif
     
 	; 周四上午9点半以后不允许开比赛了
-	if @HOUR == 9 and @MIN >= 40 then
+	if @HOUR = 9 and @MIN >= 40 then
         _log4a_Info("it's a maintenance day, hour="&@HOUR)
 		return true
 	endif
-    if @HOUR >= 10 and @HOUR <= 14 then
+    if @HOUR >= 10 and @HOUR <= 12 then
         _log4a_Info("it's a maintenance day, hour="&@HOUR)
 		return true
     endif
     
-    _log4a_Info("it's NOT a maintenance day, hour="&@HOUR)
+    _log4a_Info("it's NOT a maintenance day, hour="&@HOUR&",min="&@MIN)
 	return false
 EndFunc
 
